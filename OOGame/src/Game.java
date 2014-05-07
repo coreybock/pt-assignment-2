@@ -110,7 +110,7 @@ public class Game extends JFrame {
    {
        Game game = new Game();
        game.setTitle("Monster Game");
-       game.setSize(700,700);
+       game.setSize(1000,600);
        game.setLocationRelativeTo(null);  // center the frame
        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        game.setVisible(true);
