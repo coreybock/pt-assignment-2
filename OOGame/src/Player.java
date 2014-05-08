@@ -39,4 +39,7 @@ public class Player extends Moveable {
 		currentEnergy += 6;
 		return currentEnergy;
 	}
-}
+	public static void rest() {
+		readyToStart = false;
+	}
+	}

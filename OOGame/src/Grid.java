@@ -1,62 +1,82 @@
 /* This class uses a partially hollow 2D array to represent the games grid.  
  * Row and column corresponds to the 2D array row and column respectively. 
  * Hence, for the standard grid both row and column must be in the range 
- * 0 to 10. Furthermore, either row or column must be 0, 5 or 10.    
- */
+ * 0 to 10. Furthermore, either row or column must be 0, 5 or 10. */
 
-public class Grid {
-
+public class Grid
+{
 	Cell cells[] = new Cell[57];
 	Cell cells2D[][] = new Cell[11][11];
 
-	public Grid() {
+	public Grid()
+	{
 		int k = 0;
 		for (int i = 0; i < 11; i++)
+		{
 			for (int j = 0; j < 11; j++)
-				if ((i % 5 == 0) || (j % 5 == 0 && i % 5 != 0)) {
+			{
+				if ((i % 5 == 0) || (j % 5 == 0 && i % 5 != 0))
+				{
 					cells2D[i][j] = new Cell(i, j);
 					cells[k++] = cells2D[i][j];
 				}
+			}
+		}
 	}
-
+	
 	/*
 	 * Returns a reference to the specified cell. row and cell must be in the
 	 * range 0 .. 10 and either row or col must be 0, 5 or 10.
 	 */
-	public Cell getCell(int row, int col) throws Exception {
-		if ((row % 5 != 0 && col % 5 != 0) || row < 0 || row > 10 || col < 0
-				|| col > 10)
+	public Cell getCell(int row, int col) throws Exception
+	{
+		if ((row % 5 != 0 && col % 5 != 0) || row < 0 || row > 10 || col < 0|| col > 10)
 			throw new Exception("Invalid Coordiantes row = " + row + " column "
 					+ col);
 		return cells2D[row][col];
 	}
 
-	/*
-	 * Returns the cell in the specified direction of the given cell. Valid
+	/* Returns the cell in the specified direction of the given cell. Valid
 	 * direction must be either 'R', 'L', 'U', 'D' or ' '. A null value will be
-	 * returned if attempt to get a non-existent cell.
-	 */
-	public Cell getCell(Cell cell, char direction) {
+	 * returned if attempt to get a non-existent cell. */
+	
+	public Cell getCell(Cell cell, char direction)
+	{
 		if (direction == ' ')
-			return cell;
-		if (direction == 'U') {
-			if (cell.col % 5 == 0 && cell.row > 0)
-				return cells2D[cell.row - 1][cell.col];
-			return cell;
-		} else if (direction == 'D') {
-			if (cell.col % 5 == 0 && cell.row < 10)
-				return cells2D[cell.row + 1][cell.col];
-			return cell;
-		} else if (direction == 'L') {
-			if (cell.row % 5 == 0 && cell.col > 0)
-				return cells2D[cell.row][cell.col - 1];
-			return cell;
-		} else if (direction == 'R') {
-			if (cell.row % 5 == 0 && cell.col < 10)
-				return cells2D[cell.row][cell.col + 1];
+		{
 			return cell;
 		}
-		return null;
+		else if (direction == 'U')
+		{
+			if (cell.col % 5 == 0 && cell.row > 0)
+			{
+				return cells2D[cell.row - 1][cell.col];
+				return cell;
+			} 
+		}
+		else if (direction == 'D')
+		{
+			if (cell.col % 5 == 0 && cell.row < 10)
+			{
+				return cells2D[cell.row + 1][cell.col];
+				return cell;
+			} 
+		}
+		else if (direction == 'L')
+		{
+			if (cell.row % 5 == 0 && cell.col > 0)
+			{
+				return cells2D[cell.row][cell.col - 1];
+				return cell;
+			} 
+		}
+		else if (direction == 'R')
+		{
+			if (cell.row % 5 == 0 && cell.col < 10)
+			return cells2D[cell.row][cell.col + 1];
+			return cell;
+		}
+		return cell;
 	}
 
 	public Cell[] getAllCells() {
