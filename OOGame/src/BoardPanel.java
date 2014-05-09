@@ -5,7 +5,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+
 import javax.imageio.*;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -19,15 +21,23 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	private Player player;
 	private Monster monster;
 	private Grid grid;
+	private Image bg, cnrImage;
+	private ImageIcon icon, cnrIcon;
 	private Graphics gr;
 	private Game game;
-	private final int CELLWIDTH = 40;
-	private final int CELLHEIGHT = 40;
-	private final int LMARGIN = 100;
-	private final int TMARGIN = 100;
+	 private final int CELLWIDTH = 40;
+	   private final int CELLHEIGHT = 40;
+	   private final int LMARGIN = 275;
+	   private final int TMARGIN = 50;
 
 	public BoardPanel(Grid g, Player p, Monster m) 
 	{
+		icon = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\src\\resources\\corner.jpg");
+	    //cnrIcon = new ImageIcon("resources\\corner.jpg");
+       
+	    bg = icon.getImage();
+        //cnrImage = cnrIcon.getImage();
+		
 		player = p;
 		grid = g;
 		monster = m;
@@ -68,7 +78,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			}
 		}
 		
-		File input = new File("C:/Users/.Lacey/Documents/cake.jpg");
+		File input = new File("C:/Users/Corey/Downloads/cake.jpg");
 		cell = player.getCell();
 		BufferedImage img;
 		try 
@@ -84,7 +94,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		if (monster.viewable()) 
 		{
 			cell = monster.getCell();
-			File input2 = new File("C:/Users/.Lacey/Documents/fatty.jpg");
+			File input2 = new File("C:/Users/Corey/Downloads/fatty.jpg");
 			BufferedImage fatty;
 				try 
 				{

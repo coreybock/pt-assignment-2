@@ -51,7 +51,7 @@ public class Grid
 			if (cell.col % 5 == 0 && cell.row > 0)
 			{
 				return cells2D[cell.row - 1][cell.col];
-				return cell;
+				//return cell;
 			} 
 		}
 		else if (direction == 'D')
@@ -59,7 +59,7 @@ public class Grid
 			if (cell.col % 5 == 0 && cell.row < 10)
 			{
 				return cells2D[cell.row + 1][cell.col];
-				return cell;
+				//return cell;
 			} 
 		}
 		else if (direction == 'L')
@@ -67,7 +67,7 @@ public class Grid
 			if (cell.row % 5 == 0 && cell.col > 0)
 			{
 				return cells2D[cell.row][cell.col - 1];
-				return cell;
+				//return cell;
 			} 
 		}
 		else if (direction == 'R')
