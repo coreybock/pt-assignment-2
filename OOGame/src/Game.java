@@ -8,11 +8,11 @@ import java.awt.*;
 
 public class Game extends JFrame 
 {
-	private final int TIMEALLOWED = 100;
+	private final static int TIMEALLOWED = 100;
 	private JButton start = new JButton("start");
 	private JButton restart = new JButton("restart");
 	private JButton pause = new JButton("pause");
-	private JLabel mLabel = new JLabel("Time Remaining : " + TIMEALLOWED);
+	public static JLabel mLabel = new JLabel("Time Remaining : " + TIMEALLOWED);
 	private Grid grid;
 	private Player player;
 	private Monster monster;

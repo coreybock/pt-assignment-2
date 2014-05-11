@@ -10,6 +10,7 @@ import javax.imageio.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 /* This panel represents the game board (grid) 
  * It also responds to game related events
@@ -21,22 +22,23 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	private Player player;
 	private Monster monster;
 	private Grid grid;
-	private Image bg, cnrImage;
+	private Image bg;
+	private Image cnrImage;
 	private ImageIcon icon, cnrIcon;
 	private Graphics gr;
 	private Game game;
-	 private final int CELLWIDTH = 40;
-	   private final int CELLHEIGHT = 40;
-	   private final int LMARGIN = 275;
-	   private final int TMARGIN = 50;
+	private final int CELLWIDTH = 40;
+	private final int CELLHEIGHT = 40;
+	private final int LMARGIN = 275;
+	private final int TMARGIN = 50;
 
-	public BoardPanel(Grid g, Player p, Monster m) 
+	public BoardPanel(Grid g, Player p, Monster m) throws MalformedURLException, IOException
 	{
-		icon = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\src\\resources\\corner.jpg");
-	    //cnrIcon = new ImageIcon("resources\\corner.jpg");
+		icon = new ImageIcon("C:\\Users\\Corey\\Downloads\\bgColor.jpg");
+	    cnrIcon = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\bin\\corner.jpg");
        
 	    bg = icon.getImage();
-        //cnrImage = cnrIcon.getImage();
+        cnrImage = cnrIcon.getImage();
 		
 		player = p;
 		grid = g;
@@ -60,6 +62,8 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	protected void paintComponent(Graphics gr) 
 	{
 		super.paintComponent(gr);
+		Graphics2D g2d = (Graphics2D) gr;
+        g2d.drawImage(bg, 0, 0, null); 
 		Cell cells[] = grid.getAllCells();
 		Cell cell;
 		for (int i = 0; i < cells.length; i++) 
@@ -78,33 +82,20 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			}
 		}
 		
-		File input = new File("C:/Users/Corey/Downloads/cake.jpg");
+		
 		cell = player.getCell();
-		BufferedImage img;
-		try 
-		{
-			img = ImageIO.read(input);
-			gr.drawImage(img, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
+		
+		ImageIcon imageCake = new ImageIcon("C:\\Users\\Corey\\Downloads\\cake.jpg");
+		Image Cake = imageCake.getImage();
+		gr.drawImage(Cake, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+
 
 		if (monster.viewable()) 
 		{
 			cell = monster.getCell();
-			File input2 = new File("C:/Users/Corey/Downloads/fatty.jpg");
-			BufferedImage fatty;
-				try 
-				{
-					fatty = ImageIO.read(input2);
-					gr.drawImage(fatty, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
-				} 
-				catch (IOException e) 
-				{
-					e.printStackTrace();
-				}
+			ImageIcon imageMonster = new ImageIcon("C:\\Users\\Corey\\Downloads\\fatty.jpg");
+			Image Monster = imageMonster.getImage();
+			gr.drawImage(Monster, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 		}
 	}
 		
@@ -156,7 +147,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			Player.currentEnergy -= 1;
 		} 
 		else 
-			System.out.println("No more energy"); // change later to display on screen
+			Game.mLabel.setText("You have run out of Energy!"); 
 	}
 
 	public void buttonHeld(KeyEvent c)
