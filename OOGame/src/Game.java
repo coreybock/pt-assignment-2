@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 
 /* This class is the main System level class which creates all the objects 
@@ -12,11 +11,11 @@ public class Game extends JFrame
 	private JButton start = new JButton("start");
 	private JButton restart = new JButton("restart");
 	private JButton pause = new JButton("pause");
-	private JLabel mLabel = new JLabel("Time Remaining : " + TIMEALLOWED);
+	private static JLabel mLabel = new JLabel("Time Remaining : " + TIMEALLOWED);
 	private Grid grid;
-	private Player player;
-	private Monster monster;
-	private BoardPanel bp;
+	private static Player player;
+	private static Monster monster;
+	private static BoardPanel bp;
 	public static JLabel jWarning = new JLabel("Energy Levels: " + Player.currentEnergy);
 
 	/* This constructor creates the main model objects and the panel used for
@@ -36,21 +35,22 @@ public class Game extends JFrame
 		panel.add(start);
 		panel.add(restart);
 		panel.add(pause);
-		panel.add(mLabel);
+		panel.add(mLabel);		
+		
 
 		// add Action listeners to all button event
 		start.addActionListener(bp);
 		start.addKeyListener(bp);
 		restart.addActionListener(bp);
 		pause.addActionListener(bp);
-
+		 
 		// add panels to frame
 		add(bp, BorderLayout.CENTER);
 		add(panel, BorderLayout.SOUTH);
 	}
 
 	// method to delay by specified time in ms
-	public void delay(int time)
+	public static void delay(int time)
 	{
 		try 
 		{
@@ -66,7 +66,7 @@ public class Game extends JFrame
 	 * after which it updates the moves in turn until time runs out (player won)
 	 * or player is eaten up (player lost). */
 	
-	public String play() 
+	public static String play() 
 	{
 		int time = 0;
 		String message;

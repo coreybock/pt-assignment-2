@@ -34,8 +34,8 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 
 	public BoardPanel(Grid g, Player p, Monster m) throws MalformedURLException, IOException
 	{
-		icon = new ImageIcon("C:\\Users\\Corey\\Downloads\\bgColor.jpg");
-	    cnrIcon = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\bin\\corner.jpg");
+		icon = new ImageIcon("C:\\Users\\.Lacey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\src\\resources\\bgColor.jpgg");
+	    cnrIcon = new ImageIcon("C:\\Users\\.Lacey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\bin\\corner.jpg");
        
 	    bg = icon.getImage();
         cnrImage = cnrIcon.getImage();
@@ -65,38 +65,44 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		Graphics2D g2d = (Graphics2D) gr;
         g2d.drawImage(bg, 0, 0, null); 
 		Cell cells[] = grid.getAllCells();
+		Cell cellp;
 		Cell cell;
+		Cell cellm;
 		for (int i = 0; i < cells.length; i++) 
 		{
 			cell = cells[i];
 			if (cell.col % 5 == 0 && cell.row % 5 == 0)
-			{
-				gr.setColor(Color.red);
-			}
-			else
 			{
 				gr.setColor(Color.blue);
 				gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
 				gr.setColor(Color.black);
 				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
 			}
+			else
+			{
+				gr.setColor(Color.gray);
+				gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
+				gr.setColor(Color.black);
+				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
+				
+				
+			}
 		}
 		
 		
-		cell = player.getCell();
-		
-		ImageIcon imageCake = new ImageIcon("C:\\Users\\Corey\\Downloads\\cupcake.png");
+		cellp = Player.getCell();
+		ImageIcon imageCake = new ImageIcon("C:\\Users\\.Lacey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\src\\resources\\cupcake.png");
 		Image Cake = imageCake.getImage();
-		gr.drawImage(Cake, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
-
-
+		gr.drawImage(Cake, xCor(cellp.col), yCor(cellp.row), CELLWIDTH, CELLHEIGHT, game);
+		
 		if (monster.viewable()) 
 		{
-			cell = monster.getCell();
-			ImageIcon imageMonster = new ImageIcon("C:\\Users\\Corey\\Downloads\\fatty.png");
+			ImageIcon imageMonster = new ImageIcon("C:\\Users\\.Lacey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\src\\resources\\fatty.png");
 			Image Monster = imageMonster.getImage();
-			gr.drawImage(Monster, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+			cellm = monster.getCell();
+			gr.drawImage(Monster, xCor(cellm.col), yCor(cellm.row), CELLWIDTH, CELLHEIGHT, game);
 		}
+			
 	}
 		
 		public void actionPerformed(ActionEvent arg0)

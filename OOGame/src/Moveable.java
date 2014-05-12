@@ -4,7 +4,7 @@
 
 public abstract class Moveable {
 	protected char currentDirection;
-	protected Cell currentCell;
+	protected static Cell currentCell;
 	protected Grid grid;
 
 	public Moveable(Grid g) {
@@ -23,7 +23,7 @@ public abstract class Moveable {
 		currentCell = c;
 	}
 
-	public Cell getCell() {
+	public static Cell getCell() {
 		return currentCell;
 	}
 
