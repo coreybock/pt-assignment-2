@@ -71,11 +71,11 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			cell = cells[i];
 			if (cell.col % 5 == 0 && cell.row % 5 == 0)
 			{
-				gr.setColor(Color.blue);
+				gr.setColor(Color.red);
 			}
 			else
 			{
-				gr.setColor(Color.gray);
+				gr.setColor(Color.blue);
 				gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
 				gr.setColor(Color.black);
 				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
@@ -144,6 +144,10 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			{
 				player.setDirection('R');
 			}
+			else if(c == KeyEvent.VK_ENTER)
+			{
+				player.setReady(true);
+			}
 			Player.currentEnergy -= 1;
 			Game.jWarning.setText("Energy Levels: " + Player.currentEnergy);
 		} 
@@ -171,6 +175,10 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			else if (d == KeyEvent.VK_RIGHT) 
 			{
 				player.setDirection('R');
+			}
+			else if(d == KeyEvent.VK_ENTER)
+			{
+				player.setReady(true);
 			}
 		}
 	}
