@@ -34,6 +34,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 
 	public BoardPanel(Grid g, Player p, Monster m) throws MalformedURLException, IOException
 	{
+
 		icon = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\src\\resources\\bgColor.jpg");
 	    cnrIcon = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\bin\\corner.jpg");
        
@@ -74,12 +75,10 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			if (cell.col % 5 == 0 && cell.row % 5 == 0)
 			{
 				gr.setColor(Color.blue);
-<<<<<<< HEAD
 				gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
 				gr.setColor(Color.black);
 				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
-=======
->>>>>>> parent of 90f7a98... Attempted to add enter key functionality
+
 			}
 			else
 			{
@@ -94,6 +93,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		
 		
 		cellp = Player.getCell();
+
 		ImageIcon imageCake = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\src\\resources\\cupcake.png");
 		Image Cake = imageCake.getImage();
 		gr.drawImage(Cake, xCor(cellp.col), yCor(cellp.row), CELLWIDTH, CELLHEIGHT, game);
@@ -102,7 +102,6 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		{
 
 			ImageIcon imageMonster = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\src\\resources\\fatty.png");
-
 			Image Monster = imageMonster.getImage();
 			cellm = monster.getCell();
 			gr.drawImage(Monster, xCor(cellm.col), yCor(cellm.row), CELLWIDTH, CELLHEIGHT, game);
@@ -155,6 +154,10 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			{
 				player.setDirection('R');
 			}
+			else if(c == KeyEvent.VK_ENTER)
+			{
+				player.setReady(true);
+			}
 			Player.currentEnergy -= 1;
 			Game.jWarning.setText("Energy Levels: " + Player.currentEnergy);
 		} 
@@ -182,6 +185,10 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			else if (d == KeyEvent.VK_RIGHT) 
 			{
 				player.setDirection('R');
+			}
+			else if(d == KeyEvent.VK_ENTER)
+			{
+				player.setReady(true);
 			}
 		}
 	}

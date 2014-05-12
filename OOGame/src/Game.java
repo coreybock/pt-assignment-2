@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 
 /* This class is the main System level class which creates all the objects 
