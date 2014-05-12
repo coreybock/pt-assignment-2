@@ -145,9 +145,10 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				player.setDirection('R');
 			}
 			Player.currentEnergy -= 1;
+			Game.jWarning.setText("Energy Levels: " + Player.currentEnergy);
 		} 
 		else 
-			Game.mLabel.setText("You have run out of Energy!"); 
+			Game.jWarning.setText("You have run out of Energy!"); 
 	}
 
 	public void buttonHeld(KeyEvent c)

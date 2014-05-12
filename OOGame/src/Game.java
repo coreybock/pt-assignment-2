@@ -12,11 +12,12 @@ public class Game extends JFrame
 	private JButton start = new JButton("start");
 	private JButton restart = new JButton("restart");
 	private JButton pause = new JButton("pause");
-	public static JLabel mLabel = new JLabel("Time Remaining : " + TIMEALLOWED);
+	private JLabel mLabel = new JLabel("Time Remaining : " + TIMEALLOWED);
 	private Grid grid;
 	private Player player;
 	private Monster monster;
 	private BoardPanel bp;
+	public static JLabel jWarning = new JLabel("Energy Levels: " + Player.currentEnergy);
 
 	/* This constructor creates the main model objects and the panel used for
 	 * UI. It throws an exception if an attempt is made to place the player or
@@ -31,6 +32,7 @@ public class Game extends JFrame
 
 		// Create a separate panel and add all the buttons
 		JPanel panel = new JPanel();
+		panel.add(jWarning);
 		panel.add(start);
 		panel.add(restart);
 		panel.add(pause);
