@@ -85,7 +85,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		
 		cell = player.getCell();
 		
-		ImageIcon imageCake = new ImageIcon("C:\\Users\\Corey\\Downloads\\cake.jpg");
+		ImageIcon imageCake = new ImageIcon("C:\\Users\\Corey\\Downloads\\cupcake.png");
 		Image Cake = imageCake.getImage();
 		gr.drawImage(Cake, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 
@@ -93,7 +93,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		if (monster.viewable()) 
 		{
 			cell = monster.getCell();
-			ImageIcon imageMonster = new ImageIcon("C:\\Users\\Corey\\Downloads\\fatty.jpg");
+			ImageIcon imageMonster = new ImageIcon("C:\\Users\\Corey\\Downloads\\fatty.png");
 			Image Monster = imageMonster.getImage();
 			gr.drawImage(Monster, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 		}
