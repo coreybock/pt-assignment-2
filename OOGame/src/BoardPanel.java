@@ -9,7 +9,9 @@ import java.awt.*;
 import javax.imageio.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 
 /* This panel represents the game board (grid) 
@@ -27,6 +29,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	private ImageIcon icon, cnrIcon;
 	private Graphics gr;
 	private Game game;
+	private saveGame save;
 	private final int CELLWIDTH = 40;
 	private final int CELLHEIGHT = 40;
 	private final int LMARGIN = 275;
@@ -34,13 +37,12 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 
 	public BoardPanel(Grid g, Player p, Monster m) throws MalformedURLException, IOException
 	{
-
-		icon = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\src\\resources\\bgColor.jpg");
+		icon = new ImageIcon("C:\\Users\\Corey\\Downloads\\bgColor.jpg");
 	    cnrIcon = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\bin\\corner.jpg");
        
 	    bg = icon.getImage();
         cnrImage = cnrIcon.getImage();
-		
+
 		player = p;
 		grid = g;
 		monster = m;
@@ -66,58 +68,66 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		Graphics2D g2d = (Graphics2D) gr;
         g2d.drawImage(bg, 0, 0, null); 
 		Cell cells[] = grid.getAllCells();
-		Cell cellp;
 		Cell cell;
-		Cell cellm;
 		for (int i = 0; i < cells.length; i++) 
 		{
 			cell = cells[i];
 			if (cell.col % 5 == 0 && cell.row % 5 == 0)
 			{
+				gr.setColor(Color.pink);
+				gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
+				gr.setColor(Color.black);
+				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
+			}
+			else
+			{
 				gr.setColor(Color.blue);
 				gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
 				gr.setColor(Color.black);
 				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
-
-			}
-			else
-			{
-				gr.setColor(Color.gray);
-				gr.fillRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
-				gr.setColor(Color.black);
-				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
-				
-				
 			}
 		}
-		
-		
-		cellp = Player.getCell();
 
-		ImageIcon imageCake = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\src\\resources\\cupcake.png");
+
+		cell = player.getCell();
+
+		ImageIcon imageCake = new ImageIcon("C:\\Users\\Corey\\Downloads\\cupcake.png");
 		Image Cake = imageCake.getImage();
-		gr.drawImage(Cake, xCor(cellp.col), yCor(cellp.row), CELLWIDTH, CELLHEIGHT, game);
-		
+		gr.drawImage(Cake, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+
+
 		if (monster.viewable()) 
 		{
-
-			ImageIcon imageMonster = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\src\\resources\\fatty.png");
+			cell = monster.getCell();
+			ImageIcon imageMonster = new ImageIcon("C:\\Users\\Corey\\Downloads\\fatty.png");
 			Image Monster = imageMonster.getImage();
-			cellm = monster.getCell();
-			gr.drawImage(Monster, xCor(cellm.col), yCor(cellm.row), CELLWIDTH, CELLHEIGHT, game);
+			gr.drawImage(Monster, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 		}
-			
 	}
-		
+
 		public void actionPerformed(ActionEvent arg0)
 		{
 			if (((JButton) arg0.getSource()).getText().compareTo("start") == 0)
 			{
-			player.setReady(true);
+				player.setReady(true);
 			}
 			else if (((JButton) arg0.getSource()).getText().compareTo("pause") == 0)
 			{
 				Player.rest();
+			}
+			else if (((JButton) arg0.getSource()).getText().compareTo("restart") == 0)
+			{
+				game.play();
+			}
+			else if (((JButton) arg0.getSource()).getText().compareTo("save") == 0)
+			{
+				System.out.println("Save button pressed");
+				//try {
+					save.save();
+					System.out.println("Save tried");
+				//} //catch (FileNotFoundException | UnsupportedEncodingException e) {
+					//e.printStackTrace();
+				//}
 			}
 		}
 

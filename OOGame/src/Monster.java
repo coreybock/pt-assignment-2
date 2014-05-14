@@ -21,25 +21,6 @@ public class Monster extends Moveable {
 
 	public boolean viewable() // can be used for hiding
 	{
-		Cell monster = getCell();
-		Cell player = Player.getCell();
-		int distanceCol = 0;
-		int distanceRow = 0;
-		if(monster.col>player.col){
-		distanceCol = monster.col - player.col ;
-		}
-		else distanceCol = player.col - monster.col;
-		if(monster.row>player.row)
-		{
-			distanceRow =monster.row - player.row;
-		}
-		else distanceRow = player.row - monster.row;
-			if(distanceCol <= 5 || distanceRow<=5)
-			{
-				canView = true;
-			}
-		else
-			canView = false;
-			return canView;
+		return canView;
 	}
 }

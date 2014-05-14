@@ -12,10 +12,11 @@ public class Game extends JFrame
 	private JButton start = new JButton("start");
 	private JButton restart = new JButton("restart");
 	private JButton pause = new JButton("pause");
+	private JButton save = new JButton("save");
 	private JLabel mLabel = new JLabel("Time Remaining : " + TIMEALLOWED);
 	private Grid grid;
-	private Player player;
-	private Monster monster;
+	protected Player player;
+	protected Monster monster;
 	private BoardPanel bp;
 	public static JLabel jWarning = new JLabel("Energy Levels: " + Player.currentEnergy);
 
@@ -36,13 +37,16 @@ public class Game extends JFrame
 		panel.add(start);
 		panel.add(restart);
 		panel.add(pause);
+		panel.add(save);
 		panel.add(mLabel);
-
+		
+		
 		// add Action listeners to all button event
 		start.addActionListener(bp);
 		start.addKeyListener(bp);
 		restart.addActionListener(bp);
 		pause.addActionListener(bp);
+		save.addActionListener(bp);
 
 		// add panels to frame
 		add(bp, BorderLayout.CENTER);
