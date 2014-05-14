@@ -21,6 +21,21 @@ public class Monster extends Moveable {
 
 	public boolean viewable() // can be used for hiding
 	{
-		return canView;
+		if (player.isReady())
+		{
+			Cell pcell = player.getCell();
+			Cell mcell = currentCell;
+			int distance = grid.distance(mcell, pcell);
+			if (distance<=5)
+			{
+			return true;
+			}
+			else 
+				return false;
+		}
+		
+		else 
+		return true;
+	
 	}
 }

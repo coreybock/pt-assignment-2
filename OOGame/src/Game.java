@@ -18,7 +18,7 @@ public class Game extends JFrame
 	protected Player player;
 	protected Monster monster;
 	private BoardPanel bp;
-	public static JLabel jWarning = new JLabel("Energy Levels: " + Player.currentEnergy);
+	public static JLabel jWarning = new JLabel("Energy Levels: " + Player.getCurrentEnergy());
 
 	/* This constructor creates the main model objects and the panel used for
 	 * UI. It throws an exception if an attempt is made to place the player or

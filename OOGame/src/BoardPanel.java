@@ -35,7 +35,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	private final int LMARGIN = 275;
 	private final int TMARGIN = 50;
 
-	public BoardPanel(Grid g, Player p, Monster m) throws MalformedURLException, IOException
+	public BoardPanel(Grid g, Player p, Monster m) throws Exception
 	{
 		icon = new ImageIcon("C:\\Users\\Corey\\Downloads\\bgColor.jpg");
 	    cnrIcon = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\bin\\corner.jpg");
@@ -47,6 +47,8 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		grid = g;
 		monster = m;
 		gr = this.getGraphics();
+		save = new saveGame(player, monster);
+		save.read();
 	}
 
 	// returns the x coordinate based on left margin and cell width
@@ -122,12 +124,16 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			else if (((JButton) arg0.getSource()).getText().compareTo("save") == 0)
 			{
 				System.out.println("Save button pressed");
-				//try {
-					save.save();
+				
+					try {
+						save.save();
+					} catch (FileNotFoundException
+							| UnsupportedEncodingException e) {
+						
+						e.printStackTrace();
+					}
 					System.out.println("Save tried");
-				//} //catch (FileNotFoundException | UnsupportedEncodingException e) {
-					//e.printStackTrace();
-				//}
+				
 			}
 		}
 
@@ -145,7 +151,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 
 	public void keyPressed(KeyEvent e) 
 	{
-		if (Player.currentEnergy > 0) 
+		if (Player.getCurrentEnergy() > 0) 
 		{
 			int c = e.getKeyCode();
 			if (c == KeyEvent.VK_UP) 
@@ -168,8 +174,8 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			{
 				player.setReady(true);
 			}
-			Player.currentEnergy -= 1;
-			Game.jWarning.setText("Energy Levels: " + Player.currentEnergy);
+			Player.updateEnergy(1);
+			Game.jWarning.setText("Energy Levels: " + Player.getCurrentEnergy());
 		} 
 		else 
 			Game.jWarning.setText("You have run out of Energy!"); 
