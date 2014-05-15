@@ -23,13 +23,13 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 {
 	private Player player;
 	private Monster monster;
-	private Grid grid;
+	protected static Grid grid;
 	private Image bg;
 	private Image cnrImage;
 	private ImageIcon icon, cnrIcon;
 	private Graphics gr;
 	private Game game;
-	private saveGame save;
+//	private saveGame save;
 	private final int CELLWIDTH = 40;
 	private final int CELLHEIGHT = 40;
 	private final int LMARGIN = 275;
@@ -47,8 +47,8 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		grid = g;
 		monster = m;
 		gr = this.getGraphics();
-		save = new saveGame(player, monster);
-		save.read();
+//		save = new saveGame(player, monster);
+//		save.read();
 	}
 
 	// returns the x coordinate based on left margin and cell width
@@ -88,12 +88,42 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				gr.setColor(Color.black);
 				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
 			}
-		}
+			int n = Nuggets.Randomize();
+			boolean visible = Nuggets.visible();
+		
+			if (visible = true)
+			{
+				if(n == 1)
+				{
+					ImageIcon flourimg = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\flour.jpg");
+					Image Flour = flourimg.getImage();
+					gr.drawImage(Flour, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+				}
+				else if (n==2)
+				{
+					ImageIcon sprinklesimg = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\sprinkles.jpg");
+					Image Sprinkles = sprinklesimg.getImage();
+					gr.drawImage(Sprinkles, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+				}
+				else if (n==3)
+				{
+					ImageIcon sugarimg = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\sugar.jpg");
+					Image Sugar = sugarimg.getImage();
+					gr.drawImage(Sugar, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+				}
+				else 
+				{
+					ImageIcon icingimg = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\icing.jpg");
+					Image Icing = icingimg.getImage();
+					gr.drawImage(Icing, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+				}
+			}
+	}
 
 
 		cell = player.getCell();
 
-		ImageIcon imageCake = new ImageIcon("C:\\Users\\Corey\\Downloads\\cupcake.png");
+		ImageIcon imageCake = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\cake.jpg");
 		Image Cake = imageCake.getImage();
 		gr.drawImage(Cake, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 
@@ -101,12 +131,13 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		if (monster.viewable()) 
 		{
 			cell = monster.getCell();
-			ImageIcon imageMonster = new ImageIcon("C:\\Users\\Corey\\Downloads\\fatty.png");
+			ImageIcon imageMonster = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\fatty.jpg");
 			Image Monster = imageMonster.getImage();
 			gr.drawImage(Monster, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 		}
 	}
 
+		
 		public void actionPerformed(ActionEvent arg0)
 		{
 			if (((JButton) arg0.getSource()).getText().compareTo("start") == 0)
@@ -121,21 +152,21 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			{
 				game.play();
 			}
-			else if (((JButton) arg0.getSource()).getText().compareTo("save") == 0)
-			{
-				System.out.println("Save button pressed");
-				
-					try {
-						save.save();
-					} catch (FileNotFoundException
-							| UnsupportedEncodingException e) {
-						
-						e.printStackTrace();
-					}
-					System.out.println("Save tried");
+//			else if (((JButton) arg0.getSource()).getText().compareTo("save") == 0)
+//			{
+//				System.out.println("Save button pressed");
+//				
+//					try {
+//						save.save();
+//					} catch (FileNotFoundException
+//							| UnsupportedEncodingException e) {
+//						
+//						e.printStackTrace();
+//					}
+//					System.out.println("Save tried");
 				
 			}
-		}
+		
 
 	public boolean held;
 	public void keyTyped(KeyEvent c)
