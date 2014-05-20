@@ -128,5 +128,12 @@ public class Game extends JFrame
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.setVisible(true);
 		game.play();
+		
+//		Authentication login = new Authentication();
+//		login.setTitle("Login");
+//		login.setSize(1000, 600);
+//		login.setLocationRelativeTo(null); // center the frame
+//		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		login.setVisible(true);
 	}
 }

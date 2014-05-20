@@ -41,9 +41,15 @@ public class Player extends Moveable {
 		readyToStart = false;
 	}
 	public static void updateEnergy(int amount){
+		if(readyToStart)
 		currentEnergy -= amount;
 	}
 	public static int getCurrentEnergy(){
 		return currentEnergy;
+	}
+	@Override
+	public void setDirection(char d) {
+		currentDirection = d;
+		Player.updateEnergy(1);
 	}
 	}

@@ -157,24 +157,29 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			if (c == KeyEvent.VK_UP) 
 			{
 				player.setDirection('U');
+//				Player.updateEnergy(1);
 			} 
 			else if (c == KeyEvent.VK_DOWN) 
 			{
 				player.setDirection('D');
+//				Player.updateEnergy(1);
 			} 
 			else if (c == KeyEvent.VK_LEFT)
 			{
 				player.setDirection('L');
+//				Player.updateEnergy(1);
 			} 
 			else if (c == KeyEvent.VK_RIGHT)
 			{
 				player.setDirection('R');
+//				Player.updateEnergy(1);
 			}
 			else if(c == KeyEvent.VK_ENTER)
 			{
 				player.setReady(true);
 			}
-			Player.updateEnergy(1);
+			//Update issue
+			
 			Game.jWarning.setText("Energy Levels: " + Player.getCurrentEnergy());
 		} 
 		else 
