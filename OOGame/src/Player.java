@@ -1,5 +1,5 @@
 public class Player extends Moveable {
-	private static int currentEnergy = 40;
+	protected static int currentEnergy = 40;
 	public static boolean readyToStart = false;
 
 	public Player(Grid g, int row, int col) throws Exception {
