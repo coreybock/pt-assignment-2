@@ -166,19 +166,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		
 
 	public boolean held;
-	public void keyTyped(KeyEvent c)
-	{
-		held = true;
-		System.out.println("LOL");
-		buttonHeld(c);
-	}
-
-	public void keyReleased(KeyEvent arg0)
-	{
-		held = false;
-	}
-
-	public void keyPressed(KeyEvent e) 
+	public void keyTyped(KeyEvent e)
 	{
 		if (Player.getCurrentEnergy() > 0) 
 		{
@@ -193,29 +181,21 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			if (c == KeyEvent.VK_UP)
 			{
 				player.setDirection('U');
-				player.updateEnergy(1);
 			} 
 			else if (c == KeyEvent.VK_DOWN) 
 			{
 				player.setDirection('D');
-				player.updateEnergy(1);
 			} 
 			else if (c == KeyEvent.VK_LEFT)
 			{
 				player.setDirection('L');
-				player.updateEnergy(1);
 			} 
 			else if (c == KeyEvent.VK_RIGHT)
 			{
 				player.setDirection('R');
-				player.updateEnergy(1);
-			}
-			else if(c == KeyEvent.VK_ENTER)
-			{
-				player.setReady(true);
-				player.updateEnergy(1);
 			}
 			turns -=1 ;
+			player.updateEnergy(1);
 			}
 			//Update issue
 			
@@ -223,37 +203,55 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		} 
 		else 
 			Game.jWarning.setText("You have run out of Energy!"); 
+		
 	}
 
-	public void buttonHeld(KeyEvent c)
+	public void keyReleased(KeyEvent arg0)
 	{
-		int d = c.getKeyCode();
-		while (held = true) 
+		held = false;
+		buttonHeld(arg0, held);
+	}
+
+	public void keyPressed(KeyEvent e) 
+	{
+		held = true;
+		buttonHeld(e, held);
+		
+	}
+
+	public void buttonHeld(KeyEvent c, boolean hold)
+	{
+		if (Player.getCurrentEnergy() > 0) 
 		{
-			if (d == KeyEvent.VK_UP)
+			boolean keep = hold;
+			int d = c.getKeyCode();
+			if (keep = true) 
 			{
-				player.setDirection('U');
+				if (d == KeyEvent.VK_UP)
+				{
+					player.setDirection('U');
+				} 
+				else if (d == KeyEvent.VK_DOWN) 
+				{
+					player.setDirection('D');
+				} 
+				else if (d == KeyEvent.VK_LEFT)
+				{
+					player.setDirection('L');
+				} 
+				else if (d == KeyEvent.VK_RIGHT) 
+				{
+					player.setDirection('R');
+				}
+				else if (d == KeyEvent.VK_SHIFT)
+				{
+					multiple = true;
+				}
+				player.updateEnergy(1);
+				Game.jWarning.setText("Energy Levels: " + Player.getCurrentEnergy());
 			} 
-			else if (d == KeyEvent.VK_DOWN) 
-			{
-				player.setDirection('D');
-			} 
-			else if (d == KeyEvent.VK_LEFT)
-			{
-				player.setDirection('L');
-			} 
-			else if (d == KeyEvent.VK_RIGHT) 
-			{
-				player.setDirection('R');
 			}
-			else if(d == KeyEvent.VK_ENTER)
-			{
-				player.setReady(true);
-			}
-			else if (d == KeyEvent.VK_SHIFT)
-			{
-				multiple = true;
-			}
-			}
+		else 
+			Game.jWarning.setText("You have run out of Energy!"); 
 		}
 	}

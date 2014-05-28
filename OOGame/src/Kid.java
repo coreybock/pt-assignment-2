@@ -41,13 +41,22 @@ public class Kid extends Monster {
 	public boolean viewable() // can be used for hiding
 	{
 		time ++;
-		if (time >= 5)
+		if (time >= 5 && canView == true)
 		{			
 			return true;
 		}
 			else 
 				return false;
 	
+	}
+	public void setViewable(boolean b)
+	{
+		if (b == true)
+		{
+			canView = true;
+		}
+		else
+			canView = false;
 	}
 	
 }

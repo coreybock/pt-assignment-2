@@ -118,6 +118,11 @@ public class Game extends JFrame
 				{
 					break;
 				}
+				if (newPlayerCell == kid.getCell())
+				{
+					System.out.println("Kid was killed");
+					kid.setViewable(false);
+				}
 				player.setDirection(' '); // reset to no direction
 				Cell newMonsterCell = monster.move();
 				
@@ -144,7 +149,6 @@ public class Game extends JFrame
 				time++;
 				mLabel.setText("Time Remaining : " + (TIMEALLOWED - time));
 				delay(200);
-				System.out.println("BP was repainted");
 				bp.repaint();
 				
 			}
