@@ -20,6 +20,7 @@ public class Game extends JFrame
 	private Grid grid;
 	protected static Player player;
 	protected Monster monster;
+	protected Nuggets sprinkles;
 	private BoardPanel bp;
 	public static JLabel jWarning = new JLabel("Energy Levels: " + Player.getCurrentEnergy());
 
@@ -32,7 +33,9 @@ public class Game extends JFrame
 		grid = new Grid();
 		player = new Player(grid, 0, 0);
 		monster = new Monster(grid, player, 5, 5);
-		bp = new BoardPanel(grid, player, monster);
+		sprinkles = new Nuggets(grid, player);
+
+		bp = new BoardPanel(grid, player, monster, sprinkles);
 
 		// Create a separate panel and add all the buttons
 		JPanel panel = new JPanel();
@@ -81,7 +84,7 @@ public class Game extends JFrame
 	 * after which it updates the moves in turn until time runs out (player won)
 	 * or player is eaten up (player lost). */
 
-	public String play() 
+	public String play() throws Exception 
 	{
 		int time = 0;
 		String message;
@@ -120,6 +123,12 @@ public class Game extends JFrame
 				{
 					System.out.println("Monster hit player");
 					break;
+				}
+				int refreshNugget = 10;
+				if (time >= refreshNugget)
+				{
+					
+					sprinkles.setVisible();
 				}
 				// update time and repaint
 				time++;

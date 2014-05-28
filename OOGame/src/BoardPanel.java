@@ -30,20 +30,21 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	private ImageIcon icon, cnrIcon;
 	private Graphics gr;
 	private Game game;
+	private Nuggets nugget;
 //	private saveGame save;
 	private final int CELLWIDTH = 40;
 	private final int CELLHEIGHT = 40;
 	private final int LMARGIN = 275;
 	private final int TMARGIN = 50;
 
-	public BoardPanel(Grid g, Player p, Monster m) throws Exception
+	public BoardPanel(Grid g, Player p, Monster m, Nuggets n) throws Exception
 	{
 		icon = new ImageIcon("src/resources/bgColor.jpg");
 	    
        
 	    bg = icon.getImage();
         
-
+	    nugget = n;
 		player = p;
 		grid = g;
 		monster = m;
@@ -89,36 +90,15 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				gr.setColor(Color.black);
 				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
 			}
-			int n = Nuggets.Randomize();
-			boolean visible = Nuggets.visible(player, player.getCell(), grid.getAllCells());
 		
-			if (visible = true)
-			{
-//				if(n == 1)
-//				{
-//					ImageIcon flourimg = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\flour.jpg");
-//					Image Flour = flourimg.getImage();
-//					gr.drawImage(Flour, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
-//				}
-//				else if (n==2)
-//				{
-					ImageIcon sprinklesimg = new ImageIcon("src/resources/sprinkles.jpg");
-					Image Sprinkles = sprinklesimg.getImage();
-					gr.drawImage(Sprinkles, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
-//				}
-//				else if (n==3)
-//				{
-//					ImageIcon sugarimg = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\sugar.jpg");
-//					Image Sugar = sugarimg.getImage();
-//					gr.drawImage(Sugar, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
-//				}
-//				else 
-//				{
-//					ImageIcon icingimg = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\icing.jpg");
-//					Image Icing = icingimg.getImage();
-//					gr.drawImage(Icing, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
-//				}
-			}
+
+		if (nugget.visible())
+		{
+				Cell nuggetCell = nugget.getCell();
+				ImageIcon sprinklesimg = new ImageIcon("src/resources/sprinkles.png");
+				Image Sprinkles = sprinklesimg.getImage();
+				gr.drawImage(Sprinkles, xCor(nuggetCell.col), yCor(nuggetCell.row), CELLWIDTH, CELLHEIGHT, game);	
+		}
 	}
 
 
@@ -159,7 +139,11 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			}
 			else if (((JButton) arg0.getSource()).getText().compareTo("restart") == 0)
 			{
-				game.play();
+				try {
+					game.play();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 //			else if (((JButton) arg0.getSource()).getText().compareTo("save") == 0)
 //			{

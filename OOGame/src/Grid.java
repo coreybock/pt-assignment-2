@@ -83,10 +83,7 @@ public class Grid
 		return cells;
 	}
 	
-	public Cell randomCell(){
-		
-		int randRow = Math.random()
-	}
+	
 
 	/*
 	 * helper method to check whether val is in the range a to b
