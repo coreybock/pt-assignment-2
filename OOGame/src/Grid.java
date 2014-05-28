@@ -82,8 +82,7 @@ public class Grid
 	public Cell[] getAllCells() {
 		return cells;
 	}
-	
-	
+
 
 	/*
 	 * helper method to check whether val is in the range a to b

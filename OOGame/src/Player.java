@@ -40,9 +40,13 @@ public class Player extends Moveable {
 	public static void rest() {
 		readyToStart = false;
 	}
-	public static void updateEnergy(int amount){
-		if(readyToStart)
-		currentEnergy -= amount;
+	public static int updateEnergy(int amount)
+	{
+		if (readyToStart = true)
+		{
+			currentEnergy -= amount;
+		}
+		return currentEnergy;
 	}
 	public static int getCurrentEnergy(){
 		return currentEnergy;
@@ -50,6 +54,11 @@ public class Player extends Moveable {
 	@Override
 	public void setDirection(char d) {
 		currentDirection = d;
-		Player.updateEnergy(1);
+	}
+	
+	public void jump()
+	{
+		
 	}
 	}
+	

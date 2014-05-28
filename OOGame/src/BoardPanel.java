@@ -36,8 +36,10 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	private final int CELLHEIGHT = 40;
 	private final int LMARGIN = 275;
 	private final int TMARGIN = 50;
+	protected boolean multiple; 
 
-	public BoardPanel(Grid g, Player p, Monster m, Nuggets n) throws Exception
+	public BoardPanel(Grid g, Player p, Monster m, Kid k, Nuggets n) throws Exception
+
 	{
 		icon = new ImageIcon("src/resources/bgColor.jpg");
 	    
@@ -45,6 +47,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	    bg = icon.getImage();
         
 	    nugget = n;
+	    kid = k;
 		player = p;
 		grid = g;
 		monster = m;
@@ -90,7 +93,6 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				gr.setColor(Color.black);
 				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
 			}
-		
 
 		if (nugget.visible())
 		{
@@ -99,6 +101,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				Image Sprinkles = sprinklesimg.getImage();
 				gr.drawImage(Sprinkles, xCor(nuggetCell.col), yCor(nuggetCell.row), CELLWIDTH, CELLHEIGHT, game);	
 		}
+
 	}
 
 
@@ -117,13 +120,13 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			gr.drawImage(Monster, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 		}
 		
-//		if (kid.viewable())
-//		{
-//			cell = kid.getCell();
-//			ImageIcon imageFatKid = new ImageIcon("C:\\Users\\Corey\\Downloads\\fatkid.jpg");
-//			Image FatKid = imageFatKid.getImage();
-//			gr.drawImage(FatKid, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
-//		}
+		if (kid.viewable())
+		{
+			cell = kid.getCell();
+			ImageIcon imageFatKid = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\fatkid.jpg");
+			Image FatKid = imageFatKid.getImage();
+			gr.drawImage(FatKid, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+		}
 	}
 
 		
@@ -144,6 +147,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+
 			}
 //			else if (((JButton) arg0.getSource()).getText().compareTo("save") == 0)
 //			{
@@ -165,6 +169,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	public void keyTyped(KeyEvent c)
 	{
 		held = true;
+		System.out.println("LOL");
 		buttonHeld(c);
 	}
 
@@ -177,30 +182,40 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	{
 		if (Player.getCurrentEnergy() > 0) 
 		{
+			int turns = 1;
+			if (this.multiple = true)
+			{
+				turns+=2;
+			}
 			int c = e.getKeyCode();
-			if (c == KeyEvent.VK_UP) 
+			while (turns > 0)
+			{
+			if (c == KeyEvent.VK_UP)
 			{
 				player.setDirection('U');
-//				Player.updateEnergy(1);
+				player.updateEnergy(1);
 			} 
 			else if (c == KeyEvent.VK_DOWN) 
 			{
 				player.setDirection('D');
-//				Player.updateEnergy(1);
+				player.updateEnergy(1);
 			} 
 			else if (c == KeyEvent.VK_LEFT)
 			{
 				player.setDirection('L');
-//				Player.updateEnergy(1);
+				player.updateEnergy(1);
 			} 
 			else if (c == KeyEvent.VK_RIGHT)
 			{
 				player.setDirection('R');
-//				Player.updateEnergy(1);
+				player.updateEnergy(1);
 			}
 			else if(c == KeyEvent.VK_ENTER)
 			{
 				player.setReady(true);
+				player.updateEnergy(1);
+			}
+			turns -=1 ;
 			}
 			//Update issue
 			
@@ -212,9 +227,9 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 
 	public void buttonHeld(KeyEvent c)
 	{
+		int d = c.getKeyCode();
 		while (held = true) 
 		{
-			int d = c.getKeyCode();
 			if (d == KeyEvent.VK_UP)
 			{
 				player.setDirection('U');
@@ -235,6 +250,10 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			{
 				player.setReady(true);
 			}
+			else if (d == KeyEvent.VK_SHIFT)
+			{
+				multiple = true;
+			}
+			}
 		}
 	}
-}

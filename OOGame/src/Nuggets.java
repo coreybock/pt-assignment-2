@@ -7,6 +7,7 @@ public class Nuggets
 	protected boolean visible = false;
 
 	
+
 	public Nuggets(Grid g, Player p) throws Exception
 	{
 		grid = g;
@@ -19,6 +20,7 @@ public class Nuggets
 		int n = 1 + (int)(Math.random() * ((4 - 1) + 1));
 		return n;
 	}
+
 	
 	public void spawnNugget() throws Exception{
 		Cell nuggetCell = grid.getCell(randomRow(), randomCol());
