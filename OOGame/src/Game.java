@@ -20,6 +20,7 @@ public class Game extends JFrame
 	private Grid grid;
 	protected static Player player;
 	protected Monster monster;
+	protected Kid kid;
 	private BoardPanel bp;
 	public static JLabel jWarning = new JLabel("Energy Levels: " + Player.getCurrentEnergy());
 
@@ -32,7 +33,8 @@ public class Game extends JFrame
 		grid = new Grid();
 		player = new Player(grid, 0, 0);
 		monster = new Monster(grid, player, 5, 5);
-		bp = new BoardPanel(grid, player, monster);
+		kid = new Kid(grid, player, 5, 6);
+		bp = new BoardPanel(grid, player, monster, kid);
 
 		// Create a separate panel and add all the buttons
 		JPanel panel = new JPanel();
@@ -89,16 +91,16 @@ public class Game extends JFrame
 		player.setDirection(' '); // set to no direction
 		while(!player.isReady())
 		{
-			if (!loggedIn&&!loginOpen)
-			{
-				Authentication login = new Authentication();
-				loginOpen = true;
-			}
-			else if (loginKilled)
-			{
-				this.dispose();
-				System.exit(0); 
-			}
+//			if (!loggedIn&&!loginOpen)
+//			{
+//				Authentication login = new Authentication();
+//				loginOpen = true;
+//			}
+//			else if (loginKilled)
+//			{
+//				this.dispose();
+//				System.exit(0); 
+//			}
 			delay(100);
 			//System.out.println("player isnt ready.");
 			//player.setReady(true);
@@ -115,11 +117,17 @@ public class Game extends JFrame
 				}
 				player.setDirection(' '); // reset to no direction
 				Cell newMonsterCell = monster.move();
-
+				
 				if (newMonsterCell == player.getCell())
 				{
 					System.out.println("Monster hit player");
 					break;
+				}
+				Cell newKidCell = kid.move();
+				
+				if (newKidCell == player.getCell())
+				{
+					System.out.println("Kid hit player");
 				}
 				// update time and repaint
 				time++;

@@ -5,11 +5,6 @@ public class Nuggets
 	private Grid grid;
 	private Cell nugCell;
 	
-	public static int Randomize()
-	{
-		int n = 1 + (int)(Math.random() * ((4 - 1) + 1));
-		return n;
-	}
 	
 	public static boolean visible(Player player, Cell playerCell, Cell[] nugCells)
 	{
