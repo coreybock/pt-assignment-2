@@ -82,6 +82,11 @@ public class Grid
 	public Cell[] getAllCells() {
 		return cells;
 	}
+	
+	public Cell randomCell(){
+		
+		int randRow = Math.random()
+	}
 
 	/*
 	 * helper method to check whether val is in the range a to b
@@ -175,6 +180,7 @@ public class Grid
 					abs(from.row - 10) + abs(to.row - 10));
 		return d;
 	}
+	
 
 	/* Test harness for Grid */
 	public static void main(String args[]) throws Exception {

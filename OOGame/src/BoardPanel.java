@@ -38,11 +38,11 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 
 	public BoardPanel(Grid g, Player p, Monster m) throws Exception
 	{
-		icon = new ImageIcon("C:\\Users\\Corey\\Downloads\\bgColor.jpg");
-	    cnrIcon = new ImageIcon("C:\\Users\\Corey\\Documents\\GitHub\\pt-assignment-2\\OOGame\\bin\\corner.jpg");
+		icon = new ImageIcon("src/resources/bgColor.jpg");
+	    
        
 	    bg = icon.getImage();
-        cnrImage = cnrIcon.getImage();
+        
 
 		player = p;
 		grid = g;
@@ -90,10 +90,10 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
 			}
 			int n = Nuggets.Randomize();
-//			boolean visible = Nuggets.visible();
+			boolean visible = Nuggets.visible(player, player.getCell(), grid.getAllCells());
 		
-//			if (visible = true)
-//			{
+			if (visible = true)
+			{
 //				if(n == 1)
 //				{
 //					ImageIcon flourimg = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\flour.jpg");
@@ -102,9 +102,9 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 //				}
 //				else if (n==2)
 //				{
-//					ImageIcon sprinklesimg = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\sprinkles.jpg");
-//					Image Sprinkles = sprinklesimg.getImage();
-//					gr.drawImage(Sprinkles, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+					ImageIcon sprinklesimg = new ImageIcon("src/resources/sprinkles.jpg");
+					Image Sprinkles = sprinklesimg.getImage();
+					gr.drawImage(Sprinkles, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 //				}
 //				else if (n==3)
 //				{
@@ -118,13 +118,13 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 //					Image Icing = icingimg.getImage();
 //					gr.drawImage(Icing, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 //				}
-//			}
+			}
 	}
 
 
 		cell = player.getCell();
 
-		ImageIcon imageCake = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\cake.jpg");
+		ImageIcon imageCake = new ImageIcon("src/resources/cupcake.png");
 		Image Cake = imageCake.getImage();
 		gr.drawImage(Cake, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 
@@ -132,18 +132,18 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		if (monster.viewable()) 
 		{
 			cell = monster.getCell();
-			ImageIcon imageMonster = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\fatty.jpg");
+			ImageIcon imageMonster = new ImageIcon("src/resources/fatty.png");
 			Image Monster = imageMonster.getImage();
 			gr.drawImage(Monster, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 		}
 		
-		if (kid.viewable())
-		{
-			cell = kid.getCell();
-			ImageIcon imageFatKid = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\fatkid.jpg");
-			Image FatKid = imageFatKid.getImage();
-			gr.drawImage(FatKid, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
-		}
+//		if (kid.viewable())
+//		{
+//			cell = kid.getCell();
+//			ImageIcon imageFatKid = new ImageIcon("C:\\Users\\Corey\\Downloads\\fatkid.jpg");
+//			Image FatKid = imageFatKid.getImage();
+//			gr.drawImage(FatKid, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+//		}
 	}
 
 		

@@ -25,7 +25,7 @@ public class Monster extends Moveable {
 		{
 			Cell pcell = player.getCell();
 			Cell mcell = currentCell;
-			int distance = grid.distance(mcell, pcell);
+			int distance = grid.distance(mcell, pcell); // monster.viewable()
 			if (distance<=5)
 			{
 			return true;
@@ -35,7 +35,7 @@ public class Monster extends Moveable {
 		}
 		
 		else 
-		return true;
+		return false;
 	
 	}
 }

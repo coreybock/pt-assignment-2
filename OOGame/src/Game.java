@@ -9,13 +9,16 @@ import java.awt.*;
 public class Game extends JFrame 
 {
 	private final static int TIMEALLOWED = 100;
+	public static boolean loggedIn = false;
+	public static boolean loginOpen = false;
+	public static boolean loginKilled = false;
 	private JButton start = new JButton("start");
 	private JButton restart = new JButton("restart");
 	private JButton pause = new JButton("pause");
 	private JButton save = new JButton("save");
 	private JLabel mLabel = new JLabel("Time Remaining : " + TIMEALLOWED);
 	private Grid grid;
-	protected Player player;
+	protected static Player player;
 	protected Monster monster;
 	private BoardPanel bp;
 	public static JLabel jWarning = new JLabel("Energy Levels: " + Player.getCurrentEnergy());
@@ -40,6 +43,7 @@ public class Game extends JFrame
 		panel.add(save);
 		panel.add(mLabel);
 		
+		System.out.println("Game construtor loaded");
 		
 		// add Action listeners to all button event
 		start.addActionListener(bp);
@@ -51,6 +55,13 @@ public class Game extends JFrame
 		// add panels to frame
 		add(bp, BorderLayout.CENTER);
 		add(panel, BorderLayout.SOUTH);
+		
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        System.exit(0);
+		    }
+		});
 	}
 
 	// method to delay by specified time in ms
@@ -74,10 +85,23 @@ public class Game extends JFrame
 	{
 		int time = 0;
 		String message;
+		System.out.println("Play was called.");
 		player.setDirection(' '); // set to no direction
 		while(!player.isReady())
 		{
+			if (!loggedIn&&!loginOpen)
+			{
+				Authentication login = new Authentication();
+				loginOpen = true;
+			}
+			else if (loginKilled)
+			{
+				this.dispose();
+				System.exit(0); 
+			}
 			delay(100);
+			//System.out.println("player isnt ready.");
+			//player.setReady(true);
 		}
 		do
 		{
@@ -94,46 +118,50 @@ public class Game extends JFrame
 
 				if (newMonsterCell == player.getCell())
 				{
+					System.out.println("Monster hit player");
 					break;
 				}
 				// update time and repaint
 				time++;
 				mLabel.setText("Time Remaining : " + (TIMEALLOWED - time));
 				delay(200);
+				System.out.println("BP was repainted");
 				bp.repaint();
+				
 			}
 			else delay(100);
 		}
 		while (time < TIMEALLOWED);
 		{
-		if (time < TIMEALLOWED) // players has been eaten up
-		{
-			message = "Cupcake was eaten";
-		}
-		else
-		{
-			message = "Cupcake survived!";
-		}
-		mLabel.setText(message);
+			if (time < TIMEALLOWED) // players has been eaten up
+			{
+				message = "Cupcake was eaten";
+			}
+			else
+			{
+				message = "Cupcake survived!";
+			}
+			mLabel.setText(message);
 		return message;
 		}
 	}
 
 	public static void main(String args[]) throws Exception
 	{
+		callGame();
+		//Authentication login = new Authentication();
+		
+		
+	}
+	public static void callGame() throws Exception{
 		Game game = new Game();
 		game.setTitle("Cupcake Survival");
 		game.setSize(1000, 600);
 		game.setLocationRelativeTo(null); // center the frame
-		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		game.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		game.setVisible(true);
 		game.play();
-		
-//		Authentication login = new Authentication();
-//		login.setTitle("Login");
-//		login.setSize(1000, 600);
-//		login.setLocationRelativeTo(null); // center the frame
-//		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		login.setVisible(true);
+		player.setReady(false);
 	}
+	
 }

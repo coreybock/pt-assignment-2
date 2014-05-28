@@ -10,7 +10,7 @@ public class Database {
 		this.password = password;
 	}
 
-	static boolean checkConnection(){
+	static boolean checkConnection() throws DatabaseException{
 		String url = "jdbc:mysql://localhost:3306/";
 		String dbName = "javagame";
 		String driver = "com.mysql.jdbc.Driver";
@@ -42,6 +42,9 @@ public class Database {
 				{
 					if (accPassword.equals(gamePassword))
 					{
+						Authentication.loggedAccID = accID;
+						Authentication.loggedAccName = accName;
+						Authentication.loggedUsername = accUsername;
 						System.out.println("Password correct");
 						return true;
 					}
@@ -53,8 +56,8 @@ public class Database {
 				
 			} return false;
 			} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+			throw new DatabaseException();
+			
 		}
 		}
 }

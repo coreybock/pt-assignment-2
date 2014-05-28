@@ -2,10 +2,8 @@
 public class Nuggets
 {
 	private Player player;
-	Cell Nugcells[] = BoardPanel.grid.getAllCells();
-	Cell nugCell;
-	Cell pcell = player.getCell();
-	private boolean visible;
+	private Grid grid;
+	private Cell nugCell;
 	
 	public static int Randomize()
 	{
@@ -13,16 +11,20 @@ public class Nuggets
 		return n;
 	}
 	
-	public boolean visible()
+	public static boolean visible(Player player, Cell playerCell, Cell[] nugCells)
 	{
-		for (int i = 0; i < Nugcells.length; i++) 
+		boolean visible = false;
+		for (int i = 0; i < nugCells.length; i++) 
 		{		
-			nugCell = Nugcells[i];
+			Cell nugCell = nugCells[i];
 			if(player.getCell() == nugCell)
 			{
 				visible = false;
 			}
-			else visible = true;
+			else
+			{
+				visible = true;
+			}
 		}
 		return visible;
 	}
