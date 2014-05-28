@@ -123,7 +123,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		if (kid.viewable())
 		{
 			cell = kid.getCell();
-			ImageIcon imageFatKid = new ImageIcon("C:\\Users\\.Lacey\\Downloads\\fatkid.jpg");
+			ImageIcon imageFatKid = new ImageIcon("src/resources/fatkid.png");
 			Image FatKid = imageFatKid.getImage();
 			gr.drawImage(FatKid, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 		}
