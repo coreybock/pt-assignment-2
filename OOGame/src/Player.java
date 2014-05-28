@@ -44,7 +44,8 @@ public class Player extends Moveable {
 	{
 		if (readyToStart = true)
 		{
-			currentEnergy -= amount;
+			currentEnergy -= 1;
+			System.out.println("Energy: " + currentEnergy);
 		}
 		return currentEnergy;
 	}

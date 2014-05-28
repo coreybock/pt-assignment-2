@@ -127,7 +127,7 @@ public class Game extends JFrame
 					break;
 				}
 
-				int refreshNugget = 10;
+				int refreshNugget = 5;
 				if (time >= refreshNugget)
 				{
 					
@@ -144,7 +144,7 @@ public class Game extends JFrame
 				time++;
 				mLabel.setText("Time Remaining : " + (TIMEALLOWED - time));
 				delay(200);
-				System.out.println("BP was repainted");
+				//System.out.println("BP was repainted");
 				bp.repaint();
 				
 			}
