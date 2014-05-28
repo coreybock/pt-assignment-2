@@ -118,10 +118,16 @@ public class Game extends JFrame
 				{
 					break;
 				}
-				if (newPlayerCell == kid.getCell())
+				if (newPlayerCell == kid.getCell() && kid.canView == true)
 				{
 					System.out.println("Kid was killed");
 					kid.setViewable(false);
+				}
+				if (newPlayerCell == sprinkles.getCell())
+				{
+					sprinkles.SetCell();
+					player.Addenergy();
+					jWarning.setText("Energy Levels: " + player.getCurrentEnergy());
 				}
 				player.setDirection(' '); // reset to no direction
 				Cell newMonsterCell = monster.move();
@@ -136,13 +142,14 @@ public class Game extends JFrame
 				if (time >= refreshNugget)
 				{
 					
-					sprinkles.setVisible();
-				}
+					sprinkles.setVisible(true);
+				} 
 				Cell newKidCell = kid.move();
 				
-				if (newKidCell == player.getCell())
+				if (newKidCell == player.getCell() && kid.canView == true)
 				{
 					System.out.println("Kid hit player");
+					kid.setViewable(false);
 
 				}
 				// update time and repaint

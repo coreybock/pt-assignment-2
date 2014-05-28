@@ -94,14 +94,6 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
 			}
 
-		if (nugget.visible())
-		{
-				Cell nuggetCell = nugget.getCell();
-				ImageIcon sprinklesimg = new ImageIcon("src/resources/sprinkles.png");
-				Image Sprinkles = sprinklesimg.getImage();
-				gr.drawImage(Sprinkles, xCor(nuggetCell.col), yCor(nuggetCell.row), CELLWIDTH, CELLHEIGHT, game);	
-		}
-
 	}
 
 
@@ -126,6 +118,14 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			ImageIcon imageFatKid = new ImageIcon("src/resources/fatkid.png");
 			Image FatKid = imageFatKid.getImage();
 			gr.drawImage(FatKid, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+		}
+		
+		if (nugget.visible())
+		{
+				Cell nuggetCell = nugget.getCell();
+				ImageIcon sprinklesimg = new ImageIcon("src/resources/sprinkles.png");
+				Image Sprinkles = sprinklesimg.getImage();
+				gr.drawImage(Sprinkles, xCor(nuggetCell.col), yCor(nuggetCell.row), CELLWIDTH, CELLHEIGHT, game);	
 		}
 	}
 
@@ -170,14 +170,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	{
 		if (Player.getCurrentEnergy() > 0) 
 		{
-			int turns = 1;
-			if (this.multiple = true)
-			{
-				turns+=2;
-			}
 			int c = e.getKeyCode();
-			while (turns > 0)
-			{
 			if (c == KeyEvent.VK_UP)
 			{
 				player.setDirection('U');
@@ -194,10 +187,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			{
 				player.setDirection('R');
 			}
-			turns -=1 ;
 			player.updateEnergy(1);
-			}
-			//Update issue
 			
 			Game.jWarning.setText("Energy Levels: " + Player.getCurrentEnergy());
 		} 
