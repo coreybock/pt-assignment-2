@@ -4,6 +4,7 @@ public class Kid extends Monster {
 	protected boolean canView = true; // allows
 	private Player player;
 	protected int time = 0;
+	protected int currentAge = 0;
 
 	public Kid(Grid g, Player p, int row, int col) throws Exception 
 	{
@@ -23,7 +24,7 @@ public class Kid extends Monster {
 	public boolean viewable() // can be used for hiding
 	{
 		time ++;
-		if (time >= 5 && canView == true)
+		if (time >= 5 && canView == true && currentAge<=10)
 		{			
 			return true;
 		}
@@ -39,6 +40,16 @@ public class Kid extends Monster {
 		}
 		else
 			canView = false;
+	}
+	
+	public int Age()
+	{
+		return currentAge;
+	}
+	
+	public void UpdateAge()
+	{
+		currentAge ++;
 	}
 	
 }

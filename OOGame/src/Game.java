@@ -157,6 +157,8 @@ public class Game extends JFrame
 				mLabel.setText("Time Remaining : " + (TIMEALLOWED - time));
 				delay(200);
 				bp.repaint();
+				kid.UpdateAge();
+				
 				
 			}
 			else delay(100);
