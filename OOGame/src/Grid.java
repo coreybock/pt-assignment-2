@@ -138,6 +138,46 @@ public class Grid
 		return ' ';
 	}
 
+	public char getWorstDirection(Cell from, Cell to) {
+	if (from.row == to.row)
+	{
+		if (from.col < to.col)
+			return 'L';
+		else if (from.col > to.col)
+			return 'R';
+	} 
+	else if (from.col == to.col)
+	{
+		if (from.row < to.row)
+			return 'U';
+		else if (from.row > to.row)
+			return 'D';
+	}
+
+	int row = to.row;
+	int col = to.col;
+
+	if (inBetween(to.row % 5, 1, 2))
+		row = to.row / 5 * 5;
+	else if (inBetween(to.row % 5, 3, 4))
+		row = to.row / 5 * 5 + 5;
+	if (inBetween(to.col % 5, 1, 2))
+		col = to.col / 5 * 5;
+	else if (inBetween(to.col % 5, 3, 4))
+		col = to.col / 5 * 5 + 5;
+
+	if (from.row % 5 == 0)
+		if (from.col < col)
+			return 'R';
+		else if (from.col > col)
+			return 'L';
+	if (from.col % 5 == 0)
+		if (from.row < row)
+			return 'D';
+		else if (from.row > row)
+			return 'U';
+	return ' ';
+}
 	/* A helper method to get the absolute value */
 	private int abs(int x) {
 		if (x >= 0)

@@ -1,0 +1,11 @@
+Things left to do:
+- Let user select monster and player types
+- Let player move up to 3 blocks per turn 
+- Get reset button working
+- fix sprinkles image
+- fix fat kid image
+- Allow kid to grow after time
+- Allow user to vary game parameters (such as the timeslot and the time duration)  
+- Allow user registration (name, address, username and password
+- Track scores (wins, losses) 
+- Save and retrieve user details and score history

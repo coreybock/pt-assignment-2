@@ -12,36 +12,50 @@ public class Nuggets
 	{
 		grid = g;
 		player = p;
-		setCell(g.getCell(randomRow(), randomCol()));
+		setCell(checker());
 	}
 
+	public void SetCell()throws Exception
+	{
+		setCell(checker());
+	}
 	public static int Randomize()
 	{
 		int n = 1 + (int)(Math.random() * ((4 - 1) + 1));
 		return n;
 	}
-
-	
-	public void spawnNugget() throws Exception{
+	public Cell reset() throws Exception
+	{
 		Cell nuggetCell = grid.getCell(randomRow(), randomCol());
+		return nuggetCell;
+	}
+	public Cell checker()throws Exception
+	{
+		
+		Cell nuggetCell = reset();
 		Cell playerCell = player.getCell();
 		
-		do
+		int distance = grid.distance(nuggetCell,playerCell);
+		while (distance > player.currentEnergy || playerCell==nuggetCell)
 		{
-			nuggetCell = grid.getCell(randomRow(), randomCol());
+		 reset();
 		}
-		while (playerCell == nuggetCell);
-		{
-			currentCell = nuggetCell;
-		}
-		
+		return nuggetCell;
 	}
+	
 	public boolean visible(){
 		return visible;
 	}
 	
-	public void setVisible(){
+	public void setVisible(boolean r)
+	{
+		
+		if (r == true)
+		{
 		visible = true;
+		}
+		else
+			visible = false; 
 	}
 	public int randomRow()
 	{
