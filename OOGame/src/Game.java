@@ -94,16 +94,16 @@ public class Game extends JFrame
 		player.setDirection(' '); // set to no direction
 		while(!player.isReady())
 		{
-//			if (!loggedIn&&!loginOpen)
-//			{
-//				Authentication login = new Authentication();
-//				loginOpen = true;
-//			}
-//			else if (loginKilled)
-//			{
-//				this.dispose();
-//				System.exit(0); 
-//			}
+			if (!loggedIn&&!loginOpen)
+			{
+				Authentication login = new Authentication();
+				loginOpen = true;
+			}
+			else if (loginKilled)
+			{
+				this.dispose();
+				System.exit(0); 
+			}
 			delay(100);
 			//System.out.println("player isnt ready.");
 			//player.setReady(true);
