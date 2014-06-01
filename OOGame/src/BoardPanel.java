@@ -196,7 +196,9 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				System.out.println("Save button pressed");
 				try {
 					Game.saveGame();
-				} catch (FileNotFoundException | UnsupportedEncodingException e) {
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
 				}
 				System.out.println("Save tried");
