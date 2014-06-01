@@ -31,6 +31,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	private Graphics gr;
 	private Game game;
 	private Nuggets nugget;
+	private Trap trap;
 //	private saveGame save;
 	private final int CELLWIDTH = 40;
 	private final int CELLHEIGHT = 40;
@@ -38,7 +39,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	private final int TMARGIN = 50;
 	protected boolean multiple; 
 
-	public BoardPanel(Grid g, Player p, Monster m, Kid k, Nuggets n) throws Exception
+	public BoardPanel(Grid g, Player p, Monster m, Kid k, Nuggets n, Trap t) throws Exception
 
 	{
 		icon = new ImageIcon("src/resources/bgColor.jpg");
@@ -51,6 +52,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		player = p;
 		grid = g;
 		monster = m;
+		trap = t;
 		gr = this.getGraphics();
 //		save = new saveGame(player, monster);
 //		save.read();
@@ -126,6 +128,15 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				Image Sprinkles = sprinklesimg.getImage();
 				gr.drawImage(Sprinkles, xCor(nuggetCell.col), yCor(nuggetCell.row), CELLWIDTH, CELLHEIGHT, game);	
 		}
+		
+		if (trap.visible())
+		{
+			Cell trapCell = trap.getCell();
+			System.out.println(trapCell);
+			ImageIcon trapimg = new ImageIcon("src/resources/trap.jpg");
+			Image Trap = trapimg.getImage();
+			gr.drawImage(Trap, xCor(trapCell.col), yCor(trapCell.row), CELLWIDTH, CELLHEIGHT, game);
+		}
 	}
 		public void resetGame() throws Exception{
 			player.rest();
@@ -199,6 +210,15 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			else if (c == KeyEvent.VK_RIGHT)
 			{
 				player.setDirection('R');
+			}
+			else if (c==KeyEvent.VK_SPACE)
+			{
+				try {
+					trap.setCell(player.currentCell);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				trap.setVisible(true);
 			}
 			player.updateEnergy(1);
 			

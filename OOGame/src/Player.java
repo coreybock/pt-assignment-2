@@ -13,10 +13,6 @@ public class Player extends Moveable {
 		return currentCell;
 	}
 
-	public int maxCellsPerMove() {
-		return 1;
-	}
-
 	public int pointsRemaining() {
 		return -1; // not implemented
 	}
@@ -44,7 +40,7 @@ public class Player extends Moveable {
 	{
 		if (readyToStart = true)
 		{
-			currentEnergy -= 1;
+			currentEnergy -= amount;
 			System.out.println("Energy: " + currentEnergy);
 		}
 		return currentEnergy;

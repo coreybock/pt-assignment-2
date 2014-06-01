@@ -21,6 +21,7 @@ public class Game extends JFrame
 	protected static Player player;
 	protected Monster monster;
 	protected Nuggets sprinkles;
+	protected Trap trap;
 	protected Kid kid;
 	private BoardPanel bp;
 	private GameParameters sGP;
@@ -37,9 +38,9 @@ public class Game extends JFrame
 		monster = new Monster(grid, player, 5, 5);
 		sprinkles = new Nuggets(grid, player);
 		kid = new Kid(grid, player, 5, 6);
-		bp = new BoardPanel(grid, player, monster, kid, sprinkles);
-		
 		sGP = new GameParameters(player, monster, kid);
+		bp = new BoardPanel(grid, player, monster, kid, sprinkles, trap);
+
 
 		// Create a separate panel and add all the buttons
 		JPanel panel = new JPanel();
