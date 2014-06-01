@@ -113,11 +113,24 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		
 		if (kid.viewable() && kid.active())
 		{
+			if (kid.getTime() <= 15)
+			{
 			cell = kid.getCell();
 			ImageIcon imageFatKid = new ImageIcon("src/resources/fatkid.png");
 			Image FatKid = imageFatKid.getImage();
 			gr.drawImage(FatKid, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+			}
+			else if (kid.getTime() > 15)
+			{
+			cell = kid.getCell();
+			ImageIcon imageFatKid = new ImageIcon("src/resources/fatty.png");
+			Image FatKid = imageFatKid.getImage();
+			gr.drawImage(FatKid, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
+			}
+			else
+				System.out.println("something is wrong");
 		}
+			
 		
 		if (nugget.visible() && nugget.active())
 		{

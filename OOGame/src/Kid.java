@@ -18,9 +18,16 @@ public class Kid extends Monster {
 
 	public Cell move() 
 	{
+		if (time <= 15 && canView == true)
+		{
 		currentDirection = grid.getWorstDirection(currentCell, player.getCell());
 		currentCell = (grid.getCell(getCell(), getDirection()));
 		return currentCell;
+		}
+		else 
+			currentDirection = grid.getBestDirection(currentCell, player.getCell());
+			currentCell = (grid.getCell(getCell(), getDirection()));
+			return currentCell;
 	}
 
 	public boolean viewable() // can be used for hiding
@@ -50,5 +57,9 @@ public class Kid extends Monster {
 	public void setActive(boolean result){
 		isActive = result;
 		System.out.println(isActive);
+	}
+	public int getTime()
+	{
+		return time;
 	}
 }
