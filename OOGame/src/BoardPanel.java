@@ -94,8 +94,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				gr.drawRect(xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT);
 			}
 
-	}
-
+		}
 
 		cell = player.getCell();
 
@@ -128,6 +127,20 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				gr.drawImage(Sprinkles, xCor(nuggetCell.col), yCor(nuggetCell.row), CELLWIDTH, CELLHEIGHT, game);	
 		}
 	}
+		public void resetGame() throws Exception{
+			player.rest();
+			
+			Cell newPlayerCell;
+			Cell newMonsterCell;
+			
+			newPlayerCell = grid.getCell(0, 0);
+			player.setCell(newPlayerCell);
+			
+			newMonsterCell = grid.getCell(5, 5);
+			monster.setCell(newMonsterCell);
+			
+			this.repaint();
+		}
 
 		
 		public void actionPerformed(ActionEvent arg0)
@@ -138,12 +151,12 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			}
 			else if (((JButton) arg0.getSource()).getText().compareTo("pause") == 0)
 			{
-				Player.rest();
+				player.rest();
 			}
 			else if (((JButton) arg0.getSource()).getText().compareTo("restart") == 0)
 			{
 				try {
-					game.play();
+					resetGame();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -1,6 +1,6 @@
 public class Player extends Moveable {
 	protected static int currentEnergy = 60;
-	public static boolean readyToStart = false;
+	protected boolean readyToStart = false;
 
 	public Player(Grid g, int row, int col) throws Exception {
 		super(g);
@@ -37,10 +37,10 @@ public class Player extends Moveable {
 		currentEnergy += 6;
 		return currentEnergy;
 	}
-	public static void rest() {
+	public void rest() {
 		readyToStart = false;
 	}
-	public static int updateEnergy(int amount)
+	public int updateEnergy(int amount)
 	{
 		if (readyToStart = true)
 		{

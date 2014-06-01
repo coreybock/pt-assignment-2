@@ -4,7 +4,7 @@
  */
 
 public class Monster extends Moveable {
-	private boolean canView = true; // allows
+	private boolean isHiddenMonster = false; // allows
 	private Player player;
 
 	public Monster(Grid g, Player p, int row, int col) throws Exception {
@@ -21,21 +21,36 @@ public class Monster extends Moveable {
 
 	public boolean viewable() // can be used for hiding
 	{
-		if (player.isReady())
+		if(isHiddenMonster)
 		{
-			Cell pcell = player.getCell();
-			Cell mcell = currentCell;
-			int distance = grid.distance(mcell, pcell); // monster.viewable()
-			if (distance<=5)
+			if (player.isReady())
 			{
-			return true;
+				Cell pcell = player.getCell();
+				Cell mcell = currentCell;
+				int distance = grid.distance(mcell, pcell); // monster.viewable()
+				
+				if (distance<=5)
+				{
+					return true;
+				}
+				else 
+					return false;
 			}
 			else 
 				return false;
 		}
-		
-		else 
-		return false;
-	
+		else
+			return true;
 	}
+	
+	public void setViewable(boolean b)
+	{
+		if (b == true)
+		{
+			isHiddenMonster = true;
+		}
+		else
+			isHiddenMonster = false;
+	}
+	
 }

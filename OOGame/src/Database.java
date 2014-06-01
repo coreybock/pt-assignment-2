@@ -22,6 +22,8 @@ public class Database {
 		String gameUsername = username;
 		String gamePassword = password;
 		
+		if (username != "guest")
+		{
 		try {
 			Class.forName(driver).newInstance();
 			Connection conn = DriverManager.getConnection(url+dbName,dbUsername,dbPassword);
@@ -60,7 +62,9 @@ public class Database {
 			throw new DatabaseException();
 			
 		}
-		}
+		} else
+			return true;
+	}
 	public boolean addDetails(String Name, String Username, String Address, String Password) throws DatabaseException
 	{
 		String url = "jdbc:mysql://localhost:3306/";

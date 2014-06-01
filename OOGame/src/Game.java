@@ -23,6 +23,7 @@ public class Game extends JFrame
 	protected Nuggets sprinkles;
 	protected Kid kid;
 	private BoardPanel bp;
+	private GameParameters sGP;
 	public static JLabel jWarning = new JLabel("Energy Levels: " + Player.getCurrentEnergy());
 
 	/* This constructor creates the main model objects and the panel used for
@@ -37,7 +38,8 @@ public class Game extends JFrame
 		sprinkles = new Nuggets(grid, player);
 		kid = new Kid(grid, player, 5, 6);
 		bp = new BoardPanel(grid, player, monster, kid, sprinkles);
-
+		
+		sGP = new GameParameters(player, monster, kid);
 
 		// Create a separate panel and add all the buttons
 		JPanel panel = new JPanel();
