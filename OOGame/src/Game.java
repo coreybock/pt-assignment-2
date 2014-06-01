@@ -16,7 +16,7 @@ public class Game extends JFrame
 	private JButton restart = new JButton("restart");
 	private JButton pause = new JButton("pause");
 	private JButton save = new JButton("save");
-	private JLabel mLabel = new JLabel("Time Remaining : " + TIMEALLOWED);
+	JLabel mLabel = new JLabel("Time Remaining : " + TIMEALLOWED);
 	private Grid grid;
 	protected static Player player;
 	protected Monster monster;
@@ -35,10 +35,10 @@ public class Game extends JFrame
 	{
 		grid = new Grid();
 		player = new Player(grid, 0, 0);
-		monster = new Monster(grid, player, 5, 5);
+		monster = new Monster(grid, player, 5, 5, null);
 		
 		sprinkles = new Nuggets(grid, player);
-		kid = new Kid(grid, player, 5, 6);
+		kid = new Kid(grid, player, 5, 6, null);
 		trap = new Trap(grid, player, monster);
 		bp = new BoardPanel(grid, player, monster, kid, sprinkles, trap);
 		
@@ -144,6 +144,10 @@ public class Game extends JFrame
 					System.out.println("Monster hit player");
 					break;
 				}
+				if (newMonsterCell == trap.getCell())
+				{
+					monster.setFreeze();
+				}
 
 				int refreshNugget = 5;
 				if (time >= refreshNugget)
@@ -196,6 +200,7 @@ public class Game extends JFrame
 		
 		
 	}
+	
 //	public void callGame() throws Exception{
 //		Game game = new Game();
 //		game.setTitle("Cupcake Survival");
