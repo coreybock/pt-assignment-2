@@ -1,22 +1,23 @@
 
-public class Trap extends Game {
+public class Trap{
 
 	private Player player;
 	private Grid grid;
 	private Cell currentCell;
-	protected boolean visible = false;
 	private Monster monster;
+	
+	private boolean visible = false;
 	
 	public Trap(Grid g, Player p, Monster m) throws Exception {
 		grid = g;
 		player = p;
 		monster = m;
-		setCell(player.currentCell);
+		setCell(player.getCell());
 	}
 
 	public void setCell(Cell d) throws Exception
 	{
-		setCell(d);
+		currentCell = d;
 	}
 	
 	public boolean visible()
@@ -25,7 +26,7 @@ public class Trap extends Game {
 	}
 	public void setVisible(boolean k)
 	{
-		if (k = true)
+		if (k)
 		{
 			visible = true;
 		}

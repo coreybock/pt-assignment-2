@@ -40,11 +40,8 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	protected boolean multiple; 
 
 	public BoardPanel(Grid g, Player p, Monster m, Kid k, Nuggets n, Trap t) throws Exception
-
 	{
 		icon = new ImageIcon("src/resources/bgColor.jpg");
-	    
-       
 	    bg = icon.getImage();
         
 	    nugget = n;
@@ -54,6 +51,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		monster = m;
 		trap = t;
 		gr = this.getGraphics();
+		
 //		save = new saveGame(player, monster);
 //		save.read();
 	}
@@ -133,7 +131,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		{
 			Cell trapCell = trap.getCell();
 			System.out.println(trapCell);
-			ImageIcon trapimg = new ImageIcon("src/resources/trap.jpg");
+			ImageIcon trapimg = new ImageIcon("src/resources/trap.png");
 			Image Trap = trapimg.getImage();
 			gr.drawImage(Trap, xCor(trapCell.col), yCor(trapCell.row), CELLWIDTH, CELLHEIGHT, game);
 		}
@@ -214,7 +212,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			else if (c==KeyEvent.VK_SPACE)
 			{
 				try {
-					trap.setCell(player.currentCell);
+					trap.setCell(player.getCell());
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

@@ -23,8 +23,8 @@ public class Game extends JFrame
 	protected Nuggets sprinkles;
 	protected Trap trap;
 	protected Kid kid;
+	protected GameParameters gp;
 	private BoardPanel bp;
-	private GameParameters sGP;
 	public static JLabel jWarning = new JLabel("Energy Levels: " + Player.getCurrentEnergy());
 
 	/* This constructor creates the main model objects and the panel used for
@@ -36,12 +36,14 @@ public class Game extends JFrame
 		grid = new Grid();
 		player = new Player(grid, 0, 0);
 		monster = new Monster(grid, player, 5, 5);
+		
 		sprinkles = new Nuggets(grid, player);
 		kid = new Kid(grid, player, 5, 6);
-		sGP = new GameParameters(player, monster, kid);
+		trap = new Trap(grid, player, monster);
 		bp = new BoardPanel(grid, player, monster, kid, sprinkles, trap);
+		
 
-
+		//bp = new BoardPanel(grid, player, monster, kid, sprinkles);
 		// Create a separate panel and add all the buttons
 		JPanel panel = new JPanel();
 		panel.add(jWarning);
@@ -70,6 +72,8 @@ public class Game extends JFrame
 		        System.exit(0);
 		    }
 		});
+		
+		gp = new GameParameters(player, monster, kid);
 	}
 
 	// method to delay by specified time in ms
@@ -99,7 +103,7 @@ public class Game extends JFrame
 		{
 			if (!loggedIn&&!loginOpen)
 			{
-				Authentication login = new Authentication();
+				new Authentication();
 				loginOpen = true;
 			}
 			else if (loginKilled)
@@ -181,12 +185,6 @@ public class Game extends JFrame
 
 	public static void main(String args[]) throws Exception
 	{
-		callGame();
-		//Authentication login = new Authentication();
-		
-		
-	}
-	public static void callGame() throws Exception{
 		Game game = new Game();
 		game.setTitle("Cupcake Survival");
 		game.setSize(1000, 600);
@@ -195,6 +193,18 @@ public class Game extends JFrame
 		game.setVisible(true);
 		game.play();
 		player.setReady(false);
+		
+		
 	}
+//	public void callGame() throws Exception{
+//		Game game = new Game();
+//		game.setTitle("Cupcake Survival");
+//		game.setSize(1000, 600);
+//		game.setLocationRelativeTo(null); // center the frame
+//		game.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//		game.setVisible(true);
+//		game.play();
+//		player.setReady(false);
+//	}
 	
 }
