@@ -33,6 +33,7 @@ public class Authentication extends JFrame{
         authFrame.setBackground(Color.RED);
         authFrame.setLocationRelativeTo(null); 
         authFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE );
+        authFrame.setAlwaysOnTop (true);
         
         
         GridBagConstraints c = new GridBagConstraints();

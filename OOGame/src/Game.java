@@ -73,7 +73,7 @@ public class Game extends JFrame
 		    }
 		});
 		
-		gp = new GameParameters(player, monster, kid);
+		gp = new GameParameters(player, monster, kid, sprinkles);
 	}
 
 	// method to delay by specified time in ms
