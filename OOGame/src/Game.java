@@ -1,6 +1,8 @@
 import javax.swing.*;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 
 /* This class is the main System level class which creates all the objects 
  * representing the game logic (model) and the panel for user interaction. 
@@ -9,18 +11,22 @@ import java.awt.*;
 public class Game extends JFrame 
 {
 	static int TIMEALLOWED = 100;
+	private static int baseTime;
+	private static int speed;
 	public static boolean loggedIn = false;
 	public static boolean loginOpen = false;
 	public static boolean loginKilled = false;
 	public static boolean alreadyFrozen = false;
+	protected static int time = 0;
 	private JButton start = new JButton("start");
 	private JButton restart = new JButton("restart");
 	private JButton pause = new JButton("pause");
 	private JButton save = new JButton("save");
 	static JLabel mLabel = new JLabel("Time Remaining : " + TIMEALLOWED);
 	private Grid grid;
-	protected Player player;
-	protected Monster monster;
+	private static GameStateManager gsMan;
+	protected static Player player;
+	protected static Monster monster;
 	protected Nuggets sprinkles;
 	protected Trap trap;
 	protected Kid kid;
@@ -30,6 +36,8 @@ public class Game extends JFrame
 	protected boolean kidIsActive;
 	protected boolean trapIsActive;
 	protected boolean nuggetsIsActive;
+	protected boolean loadLastGame = false;
+	protected int ppX = 0, ppY = 0, mpX = 5, mpY = 5;
 	
 	public static JLabel jWarning = new JLabel("Energy Levels: " + Player.getCurrentEnergy());
 
@@ -39,9 +47,10 @@ public class Game extends JFrame
 
 	public Game() throws Exception 
 	{
+		
 		grid = new Grid();
-		player = new Player(grid, 0, 0);
-		monster = new Monster(grid, player, 5, 5);
+		player = new Player(grid, ppX, ppY);
+		monster = new Monster(grid, player, mpX , mpY);
 		
 		kid = new Kid(grid, player, 5, 6);
 		sprinkles = new Nuggets(grid, player);
@@ -81,7 +90,24 @@ public class Game extends JFrame
 		
 		gp = new GameParameters(player, monster, kid, sprinkles, trap);
 	}
+	
+	//Allows GameParameters to set the speed
+	public static void setSpeed(int amount){
+		speed = amount;
+	}
+	
+	//Allows GameParameters to set the time
+	public static void setTime(int amount){
+		TIMEALLOWED = amount;
+		baseTime = amount;
+	}
 
+	//Allows GameParameters to set the time
+	public static void resetTime(){
+		TIMEALLOWED = baseTime;
+		time = 0;
+	}
+	
 	// method to delay by specified time in ms
 	public void delay(int time)
 	{
@@ -94,6 +120,12 @@ public class Game extends JFrame
 			e.printStackTrace();
 		}
 	}
+	
+	public static void saveGame() throws FileNotFoundException, UnsupportedEncodingException
+	{
+		gsMan = new GameStateManager();
+		gsMan.save(player, monster, player.getCurrentEnergy(), TIMEALLOWED);
+	}
 
 	/* This method waits until play is ready (until start button is pressed)
 	 * after which it updates the moves in turn until time runs out (player won)
@@ -102,7 +134,7 @@ public class Game extends JFrame
 	public String play() throws Exception 
 	{
 		
-		int time = 0;
+		
 		String message;
 		System.out.println("Play was called.");
 		System.out.println("Traps is active: " + trapIsActive);
@@ -192,11 +224,11 @@ public class Game extends JFrame
 				time++;
 				monster.setTime(time);
 				mLabel.setText("Time Remaining : " + (TIMEALLOWED - time));
-				delay(200);
+				delay(speed);
 				bp.repaint();
 				
 			}
-			else delay(100);
+			else delay(speed);
 		}
 		while (time < TIMEALLOWED);
 		{

@@ -25,6 +25,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	private Monster monster;
 	private Kid kid;
 	protected static Grid grid;
+	private int speed;
 	private Image bg;
 	private Image cnrImage;
 	private ImageIcon icon, cnrIcon;
@@ -32,7 +33,6 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	private Game game;
 	private Nuggets nugget;
 	private Trap trap;
-//	private saveGame save;
 	private final int CELLWIDTH = 40;
 	private final int CELLHEIGHT = 40;
 	private final int LMARGIN = 275;
@@ -52,8 +52,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		trap = t;
 		gr = this.getGraphics();
 		
-//		save = new saveGame(player, monster);
-//		save.read();
+		
 	}
 
 	// returns the x coordinate based on left margin and cell width
@@ -148,14 +147,17 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			newMonsterCell = grid.getCell(5, 5);
 			monster.setCell(newMonsterCell);
 			
-			Game.TIMEALLOWED = 100;
+			Game.resetTime();
 			player.resetEnergy();
 			this.repaint();
 			Game.jWarning.setText("Energy Levels: " + Player.getCurrentEnergy());
 			Game.mLabel.setText("Time Remaining : " + Game.TIMEALLOWED);
 			
 		}
-
+		
+		public void loadGame(){
+			
+		}
 		
 		public void actionPerformed(ActionEvent arg0)
 		{
@@ -176,20 +178,17 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				}
 
 			}
-//			else if (((JButton) arg0.getSource()).getText().compareTo("save") == 0)
-//			{
-//				System.out.println("Save button pressed");
-//				
-//					try {
-//						save.save();
-//					} catch (FileNotFoundException
-//							| UnsupportedEncodingException e) {
-//						
-//						e.printStackTrace();
-//					}
-//					System.out.println("Save tried");
-				
-			}
+			else if (((JButton) arg0.getSource()).getText().compareTo("save") == 0)
+			{
+				System.out.println("Save button pressed");
+				try {
+					Game.saveGame();
+				} catch (FileNotFoundException | UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				System.out.println("Save tried");
+			}		
+		}
 		
 
 	public boolean held;
@@ -280,4 +279,6 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 		else 
 			Game.jWarning.setText("You have run out of Energy!"); 
 		}
-	}
+	
+
+}
