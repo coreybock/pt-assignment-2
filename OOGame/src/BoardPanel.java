@@ -111,7 +111,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			gr.drawImage(Monster, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 		}
 		
-		if (kid.viewable())
+		if (kid.viewable() && kid.active())
 		{
 			cell = kid.getCell();
 			ImageIcon imageFatKid = new ImageIcon("src/resources/fatkid.png");
@@ -119,15 +119,15 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			gr.drawImage(FatKid, xCor(cell.col), yCor(cell.row), CELLWIDTH, CELLHEIGHT, game);
 		}
 		
-		if (nugget.visible())
+		if (nugget.visible() && nugget.active())
 		{
-				Cell nuggetCell = nugget.getCell();
-				ImageIcon sprinklesimg = new ImageIcon("src/resources/sprinkles.png");
-				Image Sprinkles = sprinklesimg.getImage();
-				gr.drawImage(Sprinkles, xCor(nuggetCell.col), yCor(nuggetCell.row), CELLWIDTH, CELLHEIGHT, game);	
+			Cell nuggetCell = nugget.getCell();
+			ImageIcon sprinklesimg = new ImageIcon("src/resources/sprinkles.png");
+			Image Sprinkles = sprinklesimg.getImage();
+			gr.drawImage(Sprinkles, xCor(nuggetCell.col), yCor(nuggetCell.row), CELLWIDTH, CELLHEIGHT, game);	
 		}
 		
-		if (trap.visible())
+		if (trap.visible() && trap.active())
 		{
 			Cell trapCell = trap.getCell();
 			System.out.println(trapCell);
@@ -148,7 +148,12 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			newMonsterCell = grid.getCell(5, 5);
 			monster.setCell(newMonsterCell);
 			
+			Game.TIMEALLOWED = 100;
+			player.resetEnergy();
 			this.repaint();
+			Game.jWarning.setText("Energy Levels: " + Player.getCurrentEnergy());
+			Game.mLabel.setText("Time Remaining : " + Game.TIMEALLOWED);
+			
 		}
 
 		
@@ -190,7 +195,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 	public boolean held;
 	public void keyTyped(KeyEvent e)
 	{
-		if (Player.getCurrentEnergy() > 0) 
+		if (Player.getCurrentEnergy() > 0 && player.isReady()) 
 		{
 			int c = e.getKeyCode();
 			if (c == KeyEvent.VK_UP)
@@ -233,7 +238,7 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 
 	public void buttonHeld(KeyEvent c, boolean hold)
 	{
-		if (Player.getCurrentEnergy() > 0) 
+		if (Player.getCurrentEnergy() > 0 && player.isReady()) 
 		{
 			boolean keep = hold;
 			int d = c.getKeyCode();

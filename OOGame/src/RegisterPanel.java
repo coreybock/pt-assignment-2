@@ -25,6 +25,7 @@ public class RegisterPanel extends JFrame{
 		regFrame.setLocationRelativeTo(null);
 		regFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		regFrame.setLayout(new GridBagLayout());
+		regFrame.setAlwaysOnTop (true);
 		
 		JPanel bgPanel = new BgPanel();
 		bgPanel.setLayout(new BorderLayout());

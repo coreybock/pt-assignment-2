@@ -6,6 +6,7 @@ public class Trap{
 	private Cell currentCell;
 	private Monster monster;
 	
+	private static boolean isActive = false;
 	private boolean visible = false;
 	
 	public Trap(Grid g, Player p, Monster m) throws Exception {
@@ -35,5 +36,13 @@ public class Trap{
 	}
 	public Cell getCell() {
 		return currentCell;
+	}
+	public boolean active()
+	{
+		return isActive;
+	}
+	public void setActive(boolean result){
+		isActive = result;
+		System.out.println(isActive);
 	}
 }

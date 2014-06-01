@@ -5,26 +5,30 @@
 
 public class Monster extends Moveable {
 	private boolean isHiddenMonster = false; // allows
+	private int time = 0;
+	private int freezeTime = 0;
 	private Player player;
 	private boolean frozen = false;
-	protected Game game; 
+	//protected Game game; 
 
-	public Monster(Grid g, Player p, int row, int col, Game l) throws Exception {
+	public Monster(Grid g, Player p, int row, int col) throws Exception {
 		super(g);
 		player = p;
 		setCell(grid.getCell(row, col));
-		game = l;
+		//game = l;
 	}
 
 	public Cell move() {
-		if (frozen = false)
+		
+		isFrozen(time, freezeTime);
+		if (!frozen)
 		{
-		currentDirection = grid.getBestDirection(currentCell, player.getCell());
-		currentCell = (grid.getCell(getCell(), getDirection()));
+			currentDirection = grid.getBestDirection(currentCell, player.getCell());
+			currentCell = (grid.getCell(getCell(), getDirection()));
 		}
 		else
 		{
-			System.out.println("frozen");
+			return currentCell;
 		}
 		return currentCell;
 	}
@@ -62,12 +66,30 @@ public class Monster extends Moveable {
 		else
 			isHiddenMonster = false;
 	}
-	public void setFreeze()
+	
+	public void setFreeze(int currentTime)
 	{
-		System.out.println("FREEZE");
+		freezeTime = currentTime + 10;
+		System.out.println("-------------FREEZE-------------");
 		frozen = true;
-		String label = game.mLabel.getText();
-		System.out.println(label);
+	}
+
+	public void isFrozen(int time, int frozenTime)
+	{
+		if (time <= frozenTime)
+		{
+			frozen = true;
+		}
+		else
+		{
+			frozen = false;
+			Game.alreadyFrozen = false;
+		}
 	}
 	
+	public void setTime(int time)
+	{
+		this.time = time;
+	}
+
 }

@@ -126,9 +126,9 @@ public class Authentication extends JFrame{
 			
 			close();
 		}
-		else
-			JOptionPane.showMessageDialog (null, "Your login credentials were incorrect!", "Login failed", JOptionPane.ERROR_MESSAGE);
-		
+		else{
+			JOptionPane.showMessageDialog (authFrame, "Your login credentials were incorrect!", "Login failed", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	public void close() throws Exception{

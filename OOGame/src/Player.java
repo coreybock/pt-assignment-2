@@ -36,6 +36,9 @@ public class Player extends Moveable {
 	public void rest() {
 		readyToStart = false;
 	}
+	public void resetEnergy() {
+		currentEnergy = 100;
+	}
 	public int updateEnergy(int amount)
 	{
 		if (readyToStart = true)

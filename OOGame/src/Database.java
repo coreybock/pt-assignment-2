@@ -31,7 +31,8 @@ public class Database {
 		
 			Statement st = conn.createStatement();
 			ResultSet res = st.executeQuery("SELECT * FROM  accounts");
-			
+			if (!gamePassword.equals(""))
+			{
 			while (res.next()){
 				
 				int accID 			= res.getInt("accID");
@@ -58,6 +59,7 @@ public class Database {
 				}
 				
 			} return false;
+			} else {System.out.println("Nothing to check"); return false;}
 			} catch (Exception e) {
 			throw new DatabaseException();
 			

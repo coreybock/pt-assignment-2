@@ -4,8 +4,8 @@ public class Nuggets
 	private Player player;
 	private Grid grid;
 	private Cell currentCell;
-	protected boolean visible = false;
-
+	protected boolean visible = true;
+	public static boolean isActive = false;
 	
 
 	public Nuggets(Grid g, Player p) throws Exception
@@ -15,9 +15,10 @@ public class Nuggets
 		setCell(checker());
 	}
 
-	public void SetCell()throws Exception
+	public void move()throws Exception
 	{
 		setCell(checker());
+		System.out.println("------Sprinkles------");
 	}
 	public static int Randomize()
 	{
@@ -49,10 +50,9 @@ public class Nuggets
 	
 	public void setVisible(boolean r)
 	{
-		
-		if (r == true)
+		if (r)
 		{
-		visible = true;
+			visible = true;
 		}
 		else
 			visible = false; 
@@ -73,5 +73,13 @@ public class Nuggets
 	}
 	public Cell getCell() {
 		return currentCell;
+	}
+	public boolean active()
+	{
+		return isActive;
+	}
+	public void setActive(boolean result){
+		isActive = result;
+		System.out.println(isActive);
 	}
 }

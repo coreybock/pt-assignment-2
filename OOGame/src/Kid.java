@@ -4,15 +4,16 @@ public class Kid extends Monster {
 	protected boolean canView = true; // allows
 	private Player player;
 	protected int time = 0;
-	protected Game game; 
+	protected boolean isActive = false;
+	//protected Game game; 
 
-	public Kid(Grid g, Player p, int row, int col, Game l) throws Exception 
+	public Kid(Grid g, Player p, int row, int col) throws Exception 
 	{
-		super(g, p, row, col, l);
+		super(g, p, row, col);
 		player = p;
 		setCell(grid.getCell(row, col));
 		grid = g;
-		game = l;
+		//game = l;
 	}
 
 	public Cell move() 
@@ -42,5 +43,12 @@ public class Kid extends Monster {
 		else
 			canView = false;
 	}
-	
+	public boolean active()
+	{
+		return isActive;
+	}
+	public void setActive(boolean result){
+		isActive = result;
+		System.out.println(isActive);
+	}
 }

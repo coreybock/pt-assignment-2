@@ -15,21 +15,24 @@ public class GameParameters extends JFrame {
 	protected static Monster monster;
 	protected static Player player;
 	protected static Nuggets sprinkles;
-	protected JFrame gpFrame;
+	protected static Trap trap;
+	protected static JFrame gpFrame;
 	
-	public GameParameters(Player p, Monster m, Kid k, Nuggets n)
+	public GameParameters(Player p, Monster m, Kid k, Nuggets n, Trap t)
 	{
 		player = p;
 		monster = m;
 		kid = k;
 		sprinkles = n;
+		trap = t;
+		
 		
 		
 		gpFrame = new JFrame();
 		gpFrame.setSize(500, 200);
 		gpFrame.setTitle("Game Controls");
 		gpFrame.setLocationRelativeTo(null);
-		gpFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		gpFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		gpFrame.setAlwaysOnTop (true);
 		gpFrame.setLayout(new GridBagLayout());
 		gpFrame.setVisible(true);
@@ -61,8 +64,8 @@ class selectComponents extends JPanel{
 			GridBagConstraints c = new GridBagConstraints();
 	        c.fill = GridBagConstraints.HORIZONTAL;
 			
-			String[] monOptions 	= 	{"Normal Fatty","Hidden Fatty","Productive Fatty"}; // Normal, Hidden Monster or Productive Monster
-			String[] playOptions	=	{"Normal Cupcake","Cupcake with Sprinkles","Cupcake with Traps"}; // Normal, Player Extension #1 and Player Extension #3
+			String[] monOptions 	= 	{"Normal Fatty","Hidden Fatty","Productive Fatty","Both"}; // Normal, Hidden Monster or Productive Monster
+			String[] playOptions	=	{"Normal Cupcake","Cupcake with Sprinkles","Cupcake with Traps","Both"}; // Normal, Player Extension #1 and Player Extension #3
 			
 			final JComboBox monList 		= 	new JComboBox(monOptions);
 			final JComboBox playerList 		= 	new JComboBox(playOptions);
@@ -112,29 +115,63 @@ class selectComponents extends JPanel{
 					if (monSelected.equals("Hidden Fatty"))
 					{
 						GameParameters.monster.setViewable(true);
+						GameParameters.gpFrame.dispose();
 						System.out.println("Hidden Fatty");
 					}
 					else if (monSelected.equals("Productive Fatty"))
 					{
-						GameParameters.kid.setViewable(true);
+						GameParameters.kid.setActive(true);
+						GameParameters.gpFrame.dispose();
 						System.out.println("Productive Fatty");
+					}
+					else if (monSelected.equals("Both"))
+					{
+						GameParameters.kid.setActive(true);
+						GameParameters.monster.setViewable(true);
+						GameParameters.gpFrame.dispose();
+						System.out.println("Both");
 					}
 					else
 						System.out.println("Normal Fatty");
 					
 					if (plySelected.equals("Cupcake with Sprinkles"))
 					{
-						GameParameters.monster.setViewable(true);
+						GameParameters.sprinkles.setActive(true);
+						GameParameters.gpFrame.dispose();
 						System.out.println("Cupcake with Sprinkles");
 					}
 					else if (plySelected.equals("Cupcake with Traps"))
 					{
-						GameParameters.kid.setViewable(true);
-						System.out.println("Productive Fatty");
+						GameParameters.trap.setActive(true);
+						GameParameters.gpFrame.dispose();
+						System.out.println("Cupcake with Traps");
 					}
-					
+					else if (monSelected.equals("Both"))
+					{
+						GameParameters.trap.setActive(true);
+						GameParameters.sprinkles.setActive(true);
+						GameParameters.gpFrame.dispose();
+						System.out.println("Both");
+					}
+					else
+						System.out.println("Normal Cupcake");
+					GameParameters.gpFrame.dispose();
+					//sprinkles.setActive(false);
 				}
 		});
+			
+			GameParameters.gpFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+			    @Override
+			    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+			    	
+			    	GameParameters.monster.setViewable(false);
+			    	GameParameters.sprinkles.setActive(false);
+			    	GameParameters.kid.setActive(false);
+			    	GameParameters.trap.setActive(false);
+			    	
+			        
+			    }
+			});
 		}
 }
 
