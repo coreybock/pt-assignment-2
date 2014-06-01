@@ -21,7 +21,11 @@ public class Monster extends Moveable {
 		{
 		currentDirection = grid.getBestDirection(currentCell, player.getCell());
 		currentCell = (grid.getCell(getCell(), getDirection()));
-		}			
+		}
+		else
+		{
+			System.out.println("frozen");
+		}
 		return currentCell;
 	}
 
