@@ -6,16 +6,22 @@
 public class Monster extends Moveable {
 	private boolean isHiddenMonster = false; // allows
 	private Player player;
+	private boolean frozen = false;
+	protected Game game; 
 
-	public Monster(Grid g, Player p, int row, int col) throws Exception {
+	public Monster(Grid g, Player p, int row, int col, Game l) throws Exception {
 		super(g);
 		player = p;
 		setCell(grid.getCell(row, col));
+		game = l;
 	}
 
 	public Cell move() {
+		if (frozen = false)
+		{
 		currentDirection = grid.getBestDirection(currentCell, player.getCell());
 		currentCell = (grid.getCell(getCell(), getDirection()));
+		}			
 		return currentCell;
 	}
 
@@ -51,6 +57,13 @@ public class Monster extends Moveable {
 		}
 		else
 			isHiddenMonster = false;
+	}
+	public void setFreeze()
+	{
+		System.out.println("FREEZE");
+		frozen = true;
+		String label = game.mLabel.getText();
+		System.out.println(label);
 	}
 	
 }

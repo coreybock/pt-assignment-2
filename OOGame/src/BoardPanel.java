@@ -209,12 +209,12 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 			{
 				player.setDirection('R');
 			}
-			else if (c==KeyEvent.VK_SPACE)
+			else if (c == KeyEvent.VK_T)
 			{
 				try {
 					trap.setCell(player.getCell());
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					System.out.println("failed");
 				}
 				trap.setVisible(true);
 			}
@@ -267,6 +267,15 @@ public class BoardPanel extends JPanel implements ActionListener, KeyListener
 				else if (d == KeyEvent.VK_SHIFT)
 				{
 					multiple = true;
+				}
+				else if (d == KeyEvent.VK_T)
+				{
+					try {
+						trap.setCell(player.getCell());
+					} catch (Exception e1) {
+						System.out.println("failed");
+					}
+					trap.setVisible(true);
 				}
 				player.updateEnergy(1);
 				Game.jWarning.setText("Energy Levels: " + Player.getCurrentEnergy());

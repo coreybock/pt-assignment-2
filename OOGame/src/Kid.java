@@ -4,13 +4,15 @@ public class Kid extends Monster {
 	protected boolean canView = true; // allows
 	private Player player;
 	protected int time = 0;
+	protected Game game; 
 
-	public Kid(Grid g, Player p, int row, int col) throws Exception 
+	public Kid(Grid g, Player p, int row, int col, Game l) throws Exception 
 	{
-		super(g, p, row, col);
+		super(g, p, row, col, l);
 		player = p;
 		setCell(grid.getCell(row, col));
 		grid = g;
+		game = l;
 	}
 
 	public Cell move() 
