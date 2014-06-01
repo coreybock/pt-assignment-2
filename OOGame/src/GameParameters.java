@@ -29,7 +29,7 @@ public class GameParameters extends JFrame {
 		
 		
 		gpFrame = new JFrame();
-		gpFrame.setSize(500, 200);
+		gpFrame.setSize(500, 305);
 		gpFrame.setTitle("Game Controls");
 		gpFrame.setLocationRelativeTo(null);
 		gpFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -66,13 +66,19 @@ class selectComponents extends JPanel{
 			
 			String[] monOptions 	= 	{"Normal Fatty","Hidden Fatty","Productive Fatty","Both"}; // Normal, Hidden Monster or Productive Monster
 			String[] playOptions	=	{"Normal Cupcake","Cupcake with Sprinkles","Cupcake with Traps","Both"}; // Normal, Player Extension #1 and Player Extension #3
+			String[] speedLevel		=	{"1 - Fastest", "2 - Faster", "3 - Average", "4 - Slower", "5 - Slowest"};
+			String[] timeLevel		=	{"150s", "120s", "90s", "60s", "30s"};
 			
 			final JComboBox monList 		= 	new JComboBox(monOptions);
 			final JComboBox playerList 		= 	new JComboBox(playOptions);
+			final JComboBox speedList		=	new JComboBox(speedLevel);
+			final JComboBox timeList		=	new JComboBox(timeLevel);
 			
 			JLabel header			=	new JLabel("<html><b><font color='white'>Please select Game Parameters: </font></b></hmtl><br>");
 			JLabel monsterType 		= 	new JLabel("Fatty Type:  ");
 			JLabel playerType		=	new JLabel("Cupcake Type:  ");
+			JLabel speed			=	new JLabel("Speed:  ");
+			JLabel time				=	new JLabel("Time:  ");
 			
 			JButton	selectButton	=	new JButton("Select!");
 			
@@ -100,17 +106,31 @@ class selectComponents extends JPanel{
 			
 			c.gridx = 1;
 			c.gridy = 4;
-			add(new JLabel("\n"), c);
+			add(speed, c); 
+			c.gridx = 2;
+			add(speedList, c);
 			
 			c.gridx = 1;
 			c.gridy = 5;
+			add(time, c); 
+			c.gridx = 2;
+			add(timeList, c);
+			
+			c.gridx = 1;
+			c.gridy = 6;
+			add(new JLabel("\n"), c);
+			
+			c.gridx = 1;
+			c.gridy = 7;
 			c.gridwidth = 2;
 			add(selectButton, c);
 			
 			selectButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
-					String monSelected = (String) monList.getSelectedItem();
-					String plySelected = (String) playerList.getSelectedItem();
+					String monSelected 	= (String) monList.getSelectedItem();
+					String plySelected 	= (String) playerList.getSelectedItem();
+					String speed		= (String) speedList.getSelectedItem();
+					String time			= (String) timeList.getSelectedItem();
 					
 					if (monSelected.equals("Hidden Fatty"))
 					{
@@ -155,6 +175,29 @@ class selectComponents extends JPanel{
 					}
 					else
 						System.out.println("Normal Cupcake");
+					
+					if (speed.equals("1 - Fastest"))
+						Game.setSpeed(200);
+					else if (speed.equals("2 - Faster"))
+						Game.setSpeed(400);
+					else if (speed.equals("3 - Average"))
+						Game.setSpeed(600);
+					else if (speed.equals("4 - Slower"))
+						Game.setSpeed(800);
+					else if (speed.equals("5 - Slowest"))
+						Game.setSpeed(1000);
+					
+					if (time.equals("150s"))
+						Game.setTime(150);
+					else if (time.equals("120s"))
+						Game.setTime(120);
+					else if (time.equals("90s"))
+						Game.setTime(90);
+					else if (time.equals("60s"))
+						Game.setTime(60);
+					else if (time.equals("30s"))
+						Game.setTime(30);
+					
 					GameParameters.gpFrame.dispose();
 					//sprinkles.setActive(false);
 				}

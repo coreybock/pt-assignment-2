@@ -9,3 +9,5 @@
 /registerAuthComponents$5.class
 /registerAuthComponents.class
 /BgAuthPanel.class
+/saveGame.class
+/GameStateManager.class
