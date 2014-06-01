@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -13,29 +14,43 @@ import javax.swing.*;
 
 
 public class Authentication extends JFrame{
-	private final JFrame authFrame;
+	public static JFrame authFrame;
 	public static String loggedUsername;
 	public static String loggedAccName;
 	public static int loggedAccID;
 	protected boolean Visible = true;
 	
-	private Image bg;
-	private ImageIcon icon;
-	private Graphics gr;
-	
 	public Authentication(){
-	
-		
+	    
 		authFrame  = new JFrame("Login");
 		authFrame.setResizable(false);
         authFrame.setLayout(new GridBagLayout());
         authFrame.setSize(1000, 600);
-        authFrame.setBackground(Color.RED);
         authFrame.setLocationRelativeTo(null); 
         authFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE );
         authFrame.setAlwaysOnTop (true);
-        
-        
+		
+		JPanel bgAuthPanel = new BgAuthPanel();
+		bgAuthPanel.setLayout(new BorderLayout());
+		bgAuthPanel.add(new registerAuthComponents(), BorderLayout.CENTER);
+		
+		authFrame.setContentPane(bgAuthPanel);
+		authFrame.setVisible(true);
+	}
+}
+class BgAuthPanel extends JPanel {
+	Image bg = new ImageIcon("src/resources/bgColor.jpg").getImage();
+	@Override
+	public void paintComponent(Graphics g) {
+		g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+	}
+}
+
+class registerAuthComponents extends JPanel {
+	registerAuthComponents()
+	{
+		setOpaque(false);
+		setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
 		
@@ -45,8 +60,8 @@ public class Authentication extends JFrame{
 		c.gridy = 0;
 		c.insets = new Insets(5,5,5,5);
 		heading.setHorizontalAlignment(SwingConstants.CENTER);
-		authFrame.add(heading, c);
-		authFrame.add(line, c);
+		add(heading, c);
+		add(line, c);
 		c.insets = new Insets(1,1,1,1);
 
 		final JTextField 	usernameField 	= new JTextField("Username",25);
@@ -72,15 +87,15 @@ public class Authentication extends JFrame{
 		
 		c.gridx = 1;
 		c.gridy = 1;
-		authFrame.add(usernameField, c);
+		add(usernameField, c);
 		c.gridy = 2;
-		authFrame.add(passwordField, c);
+		add(passwordField, c);
 		c.gridy = 3;
-		authFrame.add(submit, c);
+		add(submit, c);
 		c.gridy = 4;
-		authFrame.add(blank, c);
+		add(blank, c);
 		c.gridy = 5;
-		authFrame.add(register, c);
+		add(register, c);
 
 		submit.addActionListener(new ActionListener() {
 			  public void actionPerformed(ActionEvent evt) {
@@ -100,10 +115,10 @@ public class Authentication extends JFrame{
 					
 				}
 		});
-		authFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+		Authentication.authFrame.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		        authFrame.dispose();
+		        Authentication.authFrame.dispose();
 		        try {
 					CheckDetails("guest", "password");
 				} catch (Exception e) {
@@ -111,8 +126,7 @@ public class Authentication extends JFrame{
 				}
 		    }
 		});
-	
-		authFrame.setVisible(Visible);	
+
 		
 	}
 	
@@ -127,13 +141,13 @@ public class Authentication extends JFrame{
 			close();
 		}
 		else{
-			JOptionPane.showMessageDialog (authFrame, "Your login credentials were incorrect!", "Login failed", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog (Authentication.authFrame, "Your login credentials were incorrect!", "Login failed", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
 	public void close() throws Exception{
 		
-		authFrame.dispose();
+		Authentication.authFrame.dispose();
 		Game.loggedIn = true;
 	}
 
